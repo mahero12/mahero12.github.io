@@ -1,0 +1,239 @@
+@charset "UTF-8";
+
+.myclustericon {
+	background-color: blue;
+	border-radius: 100%;
+	color: white;
+	font-size: 10px;
+	font-weight: bold;
+	padding: 16px;
+	text-align: center;
+}
+/* Clase para los iconos de los marcadores de un cluster */
+.myclustericon2 {
+	opacity: 0 !important;
+}
+
+.marker-button {
+	width: 20px;
+	height: 20px;
+	border-radius: 50%;
+	border: 2px solid black;
+	margin-right: 5px;
+}
+
+.transparent-marker {
+	opacity: 0 !important;
+}
+
+.notransparent-marker {
+	opacity: 1 !important;
+}
+
+.mycircleicon {
+	background-color: red;
+	border-radius: 50%;
+	width: 20px;
+	height: 20px;
+	margin-left: -10px;
+	margin-top: -10px;
+	position: absolute;
+	border: 2px solid white;
+}
+/* Clases de las etiquetas */
+.green-popup .leaflet-popup-content-wrapper {
+	background-color: green;
+	color: white;
+}
+
+.red-popup .leaflet-popup-content-wrapper {
+	background-color: red;
+	color: white;
+}
+
+.blue-popup .leaflet-popup-content-wrapper {
+	background-color: blue;
+	color: white;
+}
+
+.orange-popup .leaflet-popup-content-wrapper {
+	background-color: orange;
+	color: white;
+}
+
+.yellow-popup .leaflet-popup-content-wrapper {
+	background-color: yellow;
+	color: white;
+}
+
+.black-popup .leaflet-popup-content-wrapper {
+	background-color: black;
+	color: white;
+}
+
+.white-popup .leaflet-popup-content-wrapper {
+	background-color: white;
+	color: black;
+}
+
+.gray-popup .leaflet-popup-content-wrapper {
+	background-color: #999999;
+	color: black;
+}
+
+.violet-popup .leaflet-popup-content-wrapper {
+	background-color: #cc66cc;
+	color: white;
+}
+/* Clases de los marcadores */
+.green-marker {
+	background-color: #33cc33;
+	color: white;
+}
+
+.red-marker {
+	background-color: red;
+	color: white;
+}
+
+.orange-marker {
+	background-color: orange;
+	color: white;
+}
+
+.yellow-marker {
+	background-color: yellow;
+	color: black;
+}
+
+.gray-marker {
+	background-color: #999999;
+	color: white;
+}
+
+.white-marker {
+	background-color: #ffffff;
+	color: black;
+}
+
+.black-marker {
+	background-color: #000000;
+	color: white;
+}
+
+.violet-marker {
+	background-color: #cc66cc;
+	color: white;
+}
+/* Clase para las leyendas */
+.leyenda {
+	display: none;
+	background-color: #fff;
+	border: 1px solid #ccc;
+	padding: 10px;
+	width: 400px;
+	height: 80px;
+	align-items: center;
+	transform: translate(-110%, 0);
+	text-align: center;
+}
+
+.marker-icon {
+	display: inline-block;
+	width: 20px;
+	height: 40px;
+	margin-right: 5px;
+	border-radius: 50%;
+}
+
+.green {
+	background-color: #33cc33;
+}
+
+.red {
+	background-color: red;
+}
+
+.orange {
+	background-color: #ff6600;
+}
+
+.yellow {
+	background-color: #ffff66;
+}
+
+.gray {
+	background-color: #999999;
+}
+
+.white {
+	background-color: #ffffff;
+	border: 1px solid #808080;
+}
+
+.black {
+	background-color: #000000;
+	border: 1px solid #fff;
+}
+
+.violet {
+	background-color: #cc66cc;
+}
+
+.blue {
+	background-color: #109DFA;
+}
+
+.leaflet-marker-icon.leaf-transparent {
+	opacity: 0 !important;
+}
+
+.leaflet-marker-icon.leaf-notransparent {
+	opacity: 1 !important;
+}
+
+.leaflet-marker-icon.leaf-black {
+	color: black !important;
+}
+
+/* Estilos CSS para el menú */
+.menu {
+	background-color: #fff;
+	border-radius: 5px;
+	box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+	padding: 10px;
+	float: left;
+	margin-right: 10px;
+	width: 300px;
+}
+
+.menu-header {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 10px;
+	background-color: #f2f2f2;
+}
+
+.menu-header h1 {
+	font-size: 20px;
+	font-weight: bold;
+	margin: 0;
+}
+
+.menu-items {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+.menu-items li {
+	padding: 10px;
+	color: #333333;
+	cursor: pointer;
+	transition: background-color 0.2s ease-in-out;
+}
+
+.menu-items li:hover {
+	background-color: #f2f2f2;
+}

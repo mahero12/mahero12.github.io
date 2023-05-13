@@ -1,0 +1,31 @@
+{ "head": { "link": [], "vars": ["object", "objectlabel", "place", "placename", "lat", "long"] },
+  "results": { "distinct": false, "ordered": true, "bindings": [
+
+{ "object": { "type": "uri", "value": "http://data.silknow.org/object/33355989-b33f-3d45-a6ab-c0ea2781bb26" }	, "objectlabel": { "type": "literal", "xml:lang": "fr", "value": "nappe" }	, "place": { "type": "uri", "value": "https://sws.geonames.org/3017382/" }	, "placename": { "type": "literal", "value": "France" }	, "lat": { "type": "literal", "value": "46" }	, "long": { "type": "literal", "value": "2" }},
+{ "object": { "type": "uri", "value": "http://data.silknow.org/object/33355989-b33f-3d45-a6ab-c0ea2781bb26" }	, "objectlabel": { "type": "literal", "xml:lang": "fr", "value": "nappe" }	, "place": { "type": "uri", "value": "https://sws.geonames.org/3175395/" }	, "placename": { "type": "literal", "value": "Italy" }	, "lat": { "type": "literal", "value": "42.83333" }	, "long": { "type": "literal", "value": "12.83333" }},
+
+
+{ "object": { "type": "uri", "value": "http://data.silknow.org/object/d17b15c9-c1bb-39a8-97c2-420107051f60" }	, "objectlabel": { "type": "literal", "xml:lang": "fr", "value": "Bataille de Fontenoy, 11 mai 1745" }	, "place": { "type": "uri", "value": "https://sws.geonames.org/3017382/" }	, "placename": { "type": "literal", "value": "France" }	, "lat": { "type": "literal", "value": "46" }	, "long": { "type": "literal", "value": "2" }},
+{ "object": { "type": "uri", "value": "http://data.silknow.org/object/d17b15c9-c1bb-39a8-97c2-420107051f60" }	, "objectlabel": { "type": "literal", "xml:lang": "fr", "value": "Bataille de Fontenoy, 11 mai 1745" }	, "place": { "type": "uri", "value": "https://sws.geonames.org/3175395/" }	, "placename": { "type": "literal", "value": "Italy" }	, "lat": { "type": "literal", "value": "42.83333" }	, "long": { "type": "literal", "value": "12.83333" }},
+
+
+{ "object": { "type": "uri", "value": "http://data.silknow.org/object/ae362f9f-dfbf-3783-b5e2-ee12fe78a28b" }	, "objectlabel": { "type": "literal", "xml:lang": "fr", "value": "Histoire de Constantin\r\nL'apparition de la croix" }	, "place": { "type": "uri", "value": "https://sws.geonames.org/3017382/" }	, "placename": { "type": "literal", "value": "France" }	, "lat": { "type": "literal", "value": "46" }	, "long": { "type": "literal", "value": "2" }},
+{ "object": { "type": "uri", "value": "http://data.silknow.org/object/ae362f9f-dfbf-3783-b5e2-ee12fe78a28b" }	, "objectlabel": { "type": "literal", "xml:lang": "fr", "value": "Histoire de Constantin\r\nL'apparition de la croix" }	, "place": { "type": "uri", "value": "https://sws.geonames.org/2802361/" }	, "placename": { "type": "literal", "value": "Belgium" }	, "lat": { "type": "literal", "value": "50.75" }	, "long": { "type": "literal", "value": "4.5" }},
+
+
+{ "object": { "type": "uri", "value": "http://data.silknow.org/object/769aba7c-fd4c-393f-bfda-aa9b1b4a1ea7" }	, "objectlabel": { "type": "literal", "value": "1800 / 1850, Izmir" }	, "place": { "type": "uri", "value": "https://sws.geonames.org/311046/" }	, "placename": { "type": "literal", "value": "Izmir" }	, "lat": { "type": "literal", "value": "38.41273" }	, "long": { "type": "literal", "value": "27.13838" }},
+
+
+{ "object": { "type": "uri", "value": "http://data.silknow.org/object/deddcd1e-76c0-3e90-ba4b-7a0f72a111e0" }	, "objectlabel": { "type": "literal", "value": "1620~ / 1630~, Seville" }	, "place": { "type": "uri", "value": "https://sws.geonames.org/2510911/" }	, "placename": { "type": "literal", "value": "Seville" }	, "lat": { "type": "literal", "value": "37.38283" }	, "long": { "type": "literal", "value": "-5.97317" }},
+
+
+
+
+{ "object": { "type": "uri", "value": "http://data.silknow.org/object/ac08fad6-a6c9-31dd-befc-e76f940f40f9" }	, "objectlabel": { "type": "literal", "value": "1801 / 1825, Spanish square" }	, "place": { "type": "uri", "value": "https://sws.geonames.org/6255081/" }	, "placename": { "type": "literal", "value": "Spanish square" }	, "lat": { "type": "literal", "value": "40.42325" }	, "long": { "type": "literal", "value": "-3.71261" }},
+
+
+
+ { "object": { "type": "uri", "value": "http://data.silknow.org/object/0a22b74c-72ba-3c3f-93c5-5ebf154b68b9" }	, "objectlabel": { "type": "literal", "xml:lang": "fr", "value": "Panneau pomp\u00E9\u00EFen (pour \u00EAtre appliqu\u00E9 en cam\u00E9e) pour la Sala de Baile de la Real Casa del Labrador d'Aranjuez" }	, "place": { "type": "uri", "value": "https://sws.geonames.org/3017382/" }	, "placename": { "type": "literal", "value": "France" }	, "lat": { "type": "literal", "value": "46" }	, "long": { "type": "literal", "value": "2" }},
+{ "object": { "type": "uri", "value": "http://data.silknow.org/object/0a22b74c-72ba-3c3f-93c5-5ebf154b68b9" }	, "objectlabel": { "type": "literal", "xml:lang": "fr", "value": "Panneau pomp\u00E9\u00EFen (pour \u00EAtre appliqu\u00E9 en cam\u00E9e) pour la Sala de Baile de la Real Casa del Labrador d'Aranjuez" }	, "place": { "type": "uri", "value": "https://sws.geonames.org/1861060/" }	, "placename": { "type": "literal", "value": "Japan" }	, "lat": { "type": "literal", "value": "35.68536" }	, "long": { "type": "literal", "value": "139.75309" }}]}}
+
+

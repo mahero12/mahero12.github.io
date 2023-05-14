@@ -67,7 +67,7 @@
 
 	  	// Envía una petición síncrona al API de GeoNames
 	  	function getClassByPlace(id) {
-	  	  const geonamesAPI = 'http://api.geonames.org/getJSON';
+	  	  const geonamesAPI = 'https://secure.geonames.org/getJSON';
 	  	  let username = usuarios[Math.floor(Math.random() * usuarios.length)];
 	  	  const geoNameId = id;
 	  	  let url = `${geonamesAPI}?geonameId=${geoNameId}&username=${username}`;     

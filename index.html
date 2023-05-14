@@ -31,7 +31,7 @@
 ///////////////////////////////////////////////////////GESTIÓN DEL API DE GEONAMES/////////////////////////////////////////////////////////////////////////////
     	// Gestión del API de GeoNames
     	const usuarios = ["mahero8", "mahero9","maherox","mahero123","mahero12","mahero13","mahero16","mahero17","mahero18","mahero19","mahero20","mahero21",];
-    	const ficheros = ["JSON/salida1.json", "JSON/salida2.json"];
+    	const ficheros = ["JSON/salida10000.json", "JSON/salida2.json"];
     	let puntosUnicos = new Set();
 	  	let mapaClases = new Map();
 
@@ -163,16 +163,18 @@ markers.addTo(map);
 		  div.style.display = 'flex';
 		  div.style.bottom = '10px';
 		  div.innerHTML = 
-		    '<div><span class="marker-icon green"></span>Ciudad</div>' +
-		    '<div><span class="marker-icon red"></span>País</div>' +
-		    '<div><span class="marker-icon orange"></span>Bosque</div>' +
-		    '<div><span class="marker-icon yellow"></span>Montaña</div>' +
-		    '<div><span class="marker-icon gray"></span>Parque</div>' +
-		    '<div><span class="marker-icon white"></span>Carretera</div>' +
-		    '<div><span class="marker-icon black"></span>Plaza/Calle</div>' +
-		    '<div><span class="marker-icon violet"></span>Agua</div>';
+			'<div class="leyenda-titulo">Leyenda:</div>' +
+		    '<div><span class="marker-icon green"></span>Ciudad </div>' +
+		    '<div><span class="marker-icon red"></span>País </div>' +
+		    '<div><span class="marker-icon orange"></span>Bosque </div>' +
+		    '<div><span class="marker-icon yellow"></span>Montaña </div>' +
+		    '<div><span class="marker-icon gray"></span>Parque </div>' +
+		    '<div><span class="marker-icon white"></span>Carretera </div>' +
+		    '<div><span class="marker-icon black"></span>Plaza/Calle </div>' +
+		    '<div><span class="marker-icon violet"></span>Agua </div>';
 		  return div;
 		};
+
 		
 //////////////////////////////////////////////CREAMOS MENÚ PARA TÉCNICA 2: NIVEL DE GRANULARIDAD/////////////////////////////////////////////////////////////////////////////
 
@@ -181,17 +183,18 @@ markers.addTo(map);
 
 		// Función para generar el contenido de la leyenda
 		legend4.onAdd = function (map) {
-		  var div = L.DomUtil.create('div', 'leyenda');
+		  var div = L.DomUtil.create('div', 'leyenda1');
 		  div.style.display = 'flex';
 		  div.style.bottom = '10px';
 		  div.innerHTML = 
+			'<div class="leyenda-titulo">Seleccione:</div>' +
 		    '<div><button class="marker-button" onclick="loadJSONAndAddMarkers2(map, \'P\')"style="background-color: green;"></button>Ciudad</div>' +
 		    '<div><button class="marker-button" onclick="loadJSONAndAddMarkers2(map, \'A\')"style="background-color: red;"></button>País</div>' +
-		    '<div><button class="marker-button" onclick="loadJSONAndAddMarkers2(map, \'V\')"style="background-color: orange;"></button>Bosque</div>' +
-		    '<div><button class="marker-button" onclick="loadJSONAndAddMarkers2(map, \'T\')"style="background-color: yellow;"></button>Montaña</div>' +
-		    '<div><button class="marker-button" onclick="loadJSONAndAddMarkers2(map, \'L\')"style="background-color: gray;"></button>Parque</div>' +
-		    '<div><button class="marker-button" onclick="loadJSONAndAddMarkers2(map, \'R\')"style="background-color: white;"></button>Carretera</div>' +
-		    '<div><button class="marker-button" onclick="loadJSONAndAddMarkers2(map, \'S\')"style="background-color: black;"></button>Plaza/Calle</div>' +
+		    '<div><button class="marker-button" onclick="loadJSONAndAddMarkers2(map, \'V\')"style="background-color: orange;"></button>Bosque  </div>' +
+		    '<div><button class="marker-button" onclick="loadJSONAndAddMarkers2(map, \'T\')"style="background-color: yellow;"></button>Montaña  </div>' +
+		    '<div><button class="marker-button" onclick="loadJSONAndAddMarkers2(map, \'L\')"style="background-color: gray;"></button>Parque  </div>' +
+		    '<div><button class="marker-button" onclick="loadJSONAndAddMarkers2(map, \'R\')"style="background-color: white;"></button>Carretera  </div>' +
+		    '<div><button class="marker-button" onclick="loadJSONAndAddMarkers2(map, \'S\')"style="background-color: black;"></button>Plaza/Calle  </div>' +
 		    '<div><button class="marker-button" onclick="loadJSONAndAddMarkers2(map, \'H\') "style="background-color: violet;"></button>Agua</div>'+
 		    '<div><button class="marker-button" onclick="loadJSONAndAddMarkers21(map) "style="background-color: blue;"></button>Todos</div>';
 		  return div;
@@ -205,13 +208,14 @@ markers.addTo(map);
 		
 		// Función para generar el contenido de la leyenda
 		legend2.onAdd = function (map) {
-		  var div = L.DomUtil.create('div', 'leyenda');
+		  var div = L.DomUtil.create('div', 'leyenda2');
 		  div.style.display = 'flex';
 		  div.style.bottom = '10px';
 		  div.innerHTML = 
-		    '<div><span class="marker-icon orange"></span>Principal</div>' +
-		    '<div><span class="marker-icon yellow"></span>Secundario</div>' +
-		    '<div><span class="marker-icon blue"></span>No hay múltiples localizaciones</div>' ;
+			'<div class="leyenda-titulo">Leyenda:</div>' +
+		    '<div><span class="marker-icon orange"></span>Principal </div>' +
+		    '<div><span class="marker-icon yellow"></span>Secundario </div>' +
+		    '<div><span class="marker-icon blue"></span>No tiene </div>';
 		  return div;
 		};
 		
@@ -222,12 +226,13 @@ markers.addTo(map);
 		
 		// Función para generar el contenido de la leyenda
 		legend3.onAdd = function (map) {
-		  var div = L.DomUtil.create('div', 'leyenda');
+		  var div = L.DomUtil.create('div', 'leyenda3');
 		  div.style.display = 'flex';
 		  div.style.bottom = '10px';
 		  div.innerHTML = 
-		    '<div><span class="marker-icon orange"></span>Marcador Principal</div>' +
-		    '<div><span class="marker-icon blue"></span>No tiene múltiples localizaciones</div>' ;
+			'<div class="leyenda-titulo">Leyenda:</div>' +
+		    '<div><span class="marker-icon orange"></span>  Principal  </div>' +
+		    '<div><span class="marker-icon blue"></span>No tiene</div>' ;
 		  return div;
 		};
 

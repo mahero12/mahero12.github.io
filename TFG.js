@@ -8,7 +8,7 @@ let button;
 //BOTÓN 1//SOLUCIÓN 1 A DIFERENTE NIVEL DE GRANULARIDAD
 function loadJSONAndAddMarkers1(map){
 	markers.clearLayers();
-	fetch('JSON/salida10000.json')
+	fetch('JSON/salida10.json')
 		.then(response => response.json())
 		.then(data => {
 			const loadedURIs = new Set();
@@ -48,18 +48,18 @@ function loadJSONAndAddMarkers1(map){
 
 function loadJSONAndAddMarkers2(map, filtro){
 	markers.clearLayers();
-	fetch('JSON/salida10000.json')
+	fetch('JSON/salida10.json')
 		.then(response => response.json())
 		.then(data => {
 			// Set para que las URI sean únicas y no estén repetidas
 			const loadedURIs = new Set();
 			// Agregue la leyenda al mapa
 			legend4.addTo(map);
-			document.querySelector('.leyenda').style.display = 'flex';
+			document.querySelector('.leyenda1').style.display = 'flex';
 
 			// ocultar la leyenda si se llama a otra función
 			document.querySelector('.menu-items').addEventListener('click', function() {
-				document.querySelector('.leyenda').style.display = 'none';
+				document.querySelector('.leyenda1').style.display = 'none';
 			});
 			// Carga los marcadores de salida3
 			for (let item in data.results.bindings) {
@@ -76,10 +76,10 @@ function loadJSONAndAddMarkers2(map, filtro){
 				//SOLUCIÓN 2 A DIFERENTE NIVEL DE GRANULARIDAD
 
 				// Determina el color del marcador según si la etiqueta contiene una coma o no
-
-				if (clase) {
+				
+				if(filtro){
 					switch (clase) { // usar una sentencia switch para evaluar el valor de valorPlace
-						case 'P': popupClass = 'green-popup';
+						case  'P': popupClass = 'green-popup';
 							markerColor = 'green';
 							if (filtro === 'P') {
 								const markerIcon = L.icon({
@@ -103,7 +103,7 @@ function loadJSONAndAddMarkers2(map, filtro){
 									.bindPopup(popupContent, popupOptions)
 									.addTo(markers);
 								loadedURIs.add(valorUri);
-							} break;
+							}break;
 						case 'A': popupClass = 'red-popup';
 							markerColor = 'red';
 							if (filtro === 'A') {
@@ -153,7 +153,7 @@ function loadJSONAndAddMarkers2(map, filtro){
 									.bindPopup(popupContent, popupOptions)
 									.addTo(markers);
 								loadedURIs.add(valorUri);
-							} break;
+							}break;
 						case 'T': popupClass = 'yellow-popup';
 							markerColor = 'yellow';
 							if (filtro === 'T') {
@@ -280,8 +280,9 @@ function loadJSONAndAddMarkers2(map, filtro){
 								loadedURIs.add(valorUri);
 							} break;
 					}
+					
 				}
-
+		
 			}
 
 
@@ -289,13 +290,13 @@ function loadJSONAndAddMarkers2(map, filtro){
 		.catch(error => console.error('Error cargando el archivo JSON:', error));
 }
 
-///////////////////////////////////////////////BOTÓN 2//SOLUCIÓN 2 A DIFERENTE NIVEL DE GRANULARIDAD/////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////BOTÓN 2- TODOS//SOLUCIÓN DIFERENTE NIVEL DE GRANULARIDAD/////////////////////////////////////////////////////////////////////////////////////////////
 
 
 //BOTÓN 2//SOLUCIÓN 2 A DIFERENTE NIVEL DE GRANULARIDAD
 function loadJSONAndAddMarkers21(map) {
 	markers.clearLayers();
-	fetch('JSON/salida10000.json')
+	fetch('JSON/salida10.json')
 		.then(response => response.json())
 		.then(data => {
 			// Set para que las URI sean únicas y no estén repetidas
@@ -368,18 +369,18 @@ function loadJSONAndAddMarkers3(map) {
 	//L.Icon.Default.prototype.options.className = 'transparent-marker';
 	markers.clearLayers();
 
-	fetch('JSON/salida10000.json')
+	fetch('JSON/salida10.json')
 		.then(response => response.json())
 		.then(data => {
 			// Set para que las URI sean únicas y no estén repetidas
 			const loadedURIs = new Set();
 			// Agregue la leyenda al mapa
 			legend2.addTo(map);
-			document.querySelector('.leyenda').style.display = 'flex';
+			document.querySelector('.leyenda2').style.display = 'flex';
 
 			// ocultar la leyenda si se llama a otra función
 			document.querySelector('.menu-items').addEventListener('click', function() {
-				document.querySelector('.leyenda').style.display = 'none';
+				document.querySelector('.leyenda2').style.display = 'none';
 			});
 
 			// Carga los marcadores de salida3
@@ -510,7 +511,7 @@ function loadJSONAndAddMarkers4(map) {
 	//L.Icon.Default.prototype.options.className = 'transparent-marker';
 	markers.clearLayers();
 
-	fetch('JSON/salida10000.json')
+	fetch('JSON/salida10.json')
 		.then(response => response.json())
 		.then(data => {
 			// Set para que las URI sean únicas y no estén repetidas
@@ -518,11 +519,11 @@ function loadJSONAndAddMarkers4(map) {
 			// Carga los marcadores de salida3
 			// Agregue la leyenda al mapa
 			legend3.addTo(map);
-			document.querySelector('.leyenda').style.display = 'flex';
+			document.querySelector('.leyenda3').style.display = 'flex';
 
 			// ocultar la leyenda si se llama a otra función
 			document.querySelector('.menu-items').addEventListener('click', function() {
-				document.querySelector('.leyenda').style.display = 'none';
+				document.querySelector('.leyenda3').style.display = 'none';
 			});
 			for (let item in data.results.bindings) {
 				let punto = data.results.bindings[item];

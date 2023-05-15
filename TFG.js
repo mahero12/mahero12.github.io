@@ -2,7 +2,7 @@ let marcadores2 = [];
 let polylineLayer;
 let heatmapLayer;
 let button;
-
+let contador;
 //////////////////////////////////////////////BOTÓN 1//SOLUCIÓN 1 A DIFERENTE NIVEL DE GRANULARIDAD/////////////////////////////////////////////////////////////////////////////
 
 //BOTÓN 1//SOLUCIÓN 1 A DIFERENTE NIVEL DE GRANULARIDAD
@@ -47,6 +47,7 @@ function loadJSONAndAddMarkers1(map){
 
 
 function loadJSONAndAddMarkers2(map, filtro){
+	contador=0;
 	markers.clearLayers();
 	fetch('JSON/salida10.json')
 		.then(response => response.json())
@@ -82,6 +83,7 @@ function loadJSONAndAddMarkers2(map, filtro){
 						case  'P': popupClass = 'green-popup';
 							markerColor = 'green';
 							if (filtro === 'P') {
+								contador ++;
 								const markerIcon = L.icon({
 									iconUrl: `https://cdn.rawgit.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-${markerColor}.png`,
 									shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-shadow.png',
@@ -107,6 +109,7 @@ function loadJSONAndAddMarkers2(map, filtro){
 						case 'A': popupClass = 'red-popup';
 							markerColor = 'red';
 							if (filtro === 'A') {
+								contador ++;
 								const markerIcon = L.icon({
 									iconUrl: `https://cdn.rawgit.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-${markerColor}.png`,
 									shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-shadow.png',
@@ -132,6 +135,7 @@ function loadJSONAndAddMarkers2(map, filtro){
 						case 'V': popupClass = 'orange-popup';
 							markerColor = 'orange';
 							if (filtro === 'V') {
+								contador ++;
 								const markerIcon = L.icon({
 									iconUrl: `https://cdn.rawgit.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-${markerColor}.png`,
 									shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-shadow.png',
@@ -157,6 +161,7 @@ function loadJSONAndAddMarkers2(map, filtro){
 						case 'T': popupClass = 'yellow-popup';
 							markerColor = 'yellow';
 							if (filtro === 'T') {
+								contador ++;
 								const markerIcon = L.icon({
 									iconUrl: `https://cdn.rawgit.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-${markerColor}.png`,
 									shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-shadow.png',
@@ -182,6 +187,7 @@ function loadJSONAndAddMarkers2(map, filtro){
 						case 'L': popupClass = 'gray-popup';
 							markerColor = 'gray';
 							if (filtro === 'L') {
+								contador ++;
 								const markerIcon = L.icon({
 									iconUrl: `https://cdn.rawgit.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-${markerColor}.png`,
 									shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-shadow.png',
@@ -207,6 +213,7 @@ function loadJSONAndAddMarkers2(map, filtro){
 						case 'R': popupClass = 'white-popup';
 							markerColor = 'white';
 							if (filtro === 'R') {
+								contador ++;
 								const markerIcon = L.icon({
 									iconUrl: `https://cdn.rawgit.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-${markerColor}.png`,
 									shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-shadow.png',
@@ -232,6 +239,7 @@ function loadJSONAndAddMarkers2(map, filtro){
 						case 'S': popupClass = 'black-popup';
 							markerColor = 'black';
 							if (filtro === 'S') {
+								contador ++;
 								const markerIcon = L.icon({
 									iconUrl: `https://cdn.rawgit.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-${markerColor}.png`,
 									shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-shadow.png',
@@ -257,6 +265,7 @@ function loadJSONAndAddMarkers2(map, filtro){
 						case 'H': popupClass = 'violet-popup';
 							markerColor = 'violet';
 							if (filtro === 'H') {
+								contador ++;
 								const markerIcon = L.icon({
 									iconUrl: `https://cdn.rawgit.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-${markerColor}.png`,
 									shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-shadow.png',
@@ -284,7 +293,9 @@ function loadJSONAndAddMarkers2(map, filtro){
 				}
 		
 			}
-
+			if(filtro && contador===0){
+			alert('No hay marcadores en esta categoría');
+			}
 
 		})
 		.catch(error => console.error('Error cargando el archivo JSON:', error));

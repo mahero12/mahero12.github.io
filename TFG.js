@@ -3,6 +3,7 @@ let polylineLayer;
 let heatmapLayer;
 let button;
 let contador;
+
 //////////////////////////////////////////////BOTÓN 1//SOLUCIÓN 1 A DIFERENTE NIVEL DE GRANULARIDAD/////////////////////////////////////////////////////////////////////////////
 
 //BOTÓN 1//SOLUCIÓN 1 A DIFERENTE NIVEL DE GRANULARIDAD
@@ -44,8 +45,6 @@ function loadJSONAndAddMarkers1(map){
 
 ///////////////////////////////////////////////////BOTÓN 2//SOLUCIÓN 2 A DIFERENTE NIVEL DE GRANULARIDAD/////////////////////////////////////////////////////////////////////////////////
 
-
-
 function loadJSONAndAddMarkers2(map, filtro){
 	contador=0;
 	markers.clearLayers();
@@ -79,7 +78,9 @@ function loadJSONAndAddMarkers2(map, filtro){
 				// Determina el color del marcador según si la etiqueta contiene una coma o no
 				
 				if(filtro){
-					switch (clase) { // usar una sentencia switch para evaluar el valor de valorPlace
+					
+					switch (clase) {
+						 // usar una sentencia switch para evaluar el valor de valorPlace
 						case  'P': popupClass = 'green-popup';
 							markerColor = 'green';
 							if (filtro === 'P') {
@@ -295,10 +296,12 @@ function loadJSONAndAddMarkers2(map, filtro){
 			}
 			if(filtro && contador===0){
 			alert('No hay marcadores en esta categoría');
-			}
+		}
 
 		})
+		
 		.catch(error => console.error('Error cargando el archivo JSON:', error));
+		
 }
 
 ///////////////////////////////////////////////BOTÓN 2- TODOS//SOLUCIÓN DIFERENTE NIVEL DE GRANULARIDAD/////////////////////////////////////////////////////////////////////////////////////////////
@@ -322,8 +325,8 @@ function loadJSONAndAddMarkers21(map) {
 				const label = punto.objectlabel.value;
 				let valorPlace = punto.place.value;
 				let clase = mapaClases.get(valorPlace.split('/')[3]);
-				let popupClass = 'violet-popup'; // establecer una clase por defecto si no se encuentra una clase adecuada 
-				let markerColor = 'violet';
+				let popupClass = 'blue-popup'; // establecer una clase por defecto si no se encuentra una clase adecuada 
+				let markerColor = 'blue';
 				//SOLUCIÓN 2 A DIFERENTE NIVEL DE GRANULARIDAD
 
 				// Determina el color del marcador según si la etiqueta contiene una coma o no
@@ -503,7 +506,7 @@ function loadJSONAndAddMarkers3(map) {
 						shadowSize: [41, 41]
 					}));
 					// Añadimos el evento click al marcador del icono naranja para que añada/elimine un marcador amarillo en las posiciones de los otros marcadores con la misma uri
-					marcadorOrange.on('click', onClick);
+					marcadorOrange.on('click', anadirMarcadoresSecundarios);
 				}
 			}
 
@@ -649,7 +652,7 @@ function loadJSONAndAddMarkers4(map) {
 
 					// Añadimos el evento click al marcador del icono naranja para que añada/elimine un marcador amarillo 
 					//en las posiciones de los otros marcadores con la misma uri
-					marcadorOrange.on('click', onClick2);
+					marcadorOrange.on('click', anadirMapaCalor);
 				}
 			}
 
@@ -750,7 +753,7 @@ function findMarcadoresByUriFalse(uri) {
 /**
  * Función que determina si debe añadir u ocultar el marcador amarillo al hacer clic en un marcador naranja
  */
-function onClick(e){
+function anadirMarcadoresSecundarios(e){
 	let uri = e.target.options.uri;
 	let marcadoresURI2 = findMarcadoresByUriFalse(uri);
 	let marcadoresURI = findMarcadoresByUri(uri);
@@ -866,7 +869,10 @@ function crearLinea(marcador1, marcador2){
 /*
  * Funcion que crea un mapa de calor 
  */
-function onClick2(event){
+let heatmapLayerList = [];
+let buttonList=[];
+function anadirMapaCalor(event){
+	
 	// Se obtiene la URI del marcador naranja sobre el que se ha hecho clic
 	const uri = event.target.options.uri;
 
@@ -887,7 +893,8 @@ function onClick2(event){
 		minZoom: 5,
 		pane: 'overlayPane'
 	}).addTo(map);
-
+	// Se añade la nueva instancia de heatmapLayer a la lista
+    heatmapLayerList.push(heatmapLayer);
 
 	// Se obtiene el contenido de la etiqueta del primer marcador
 	const popupContent = marcadoresURI[0].options.popupContent;
@@ -912,11 +919,15 @@ function onClick2(event){
 		return div;
 	};
 	button.addTo(map);
+	buttonList.push(button);
 }
 //////////////////////////////////ELIMINA MAPA DE CALOR PARA TÉCNICA 2:MÚLTIPLES LOCALIZACIONES//////////////////////////////////////////////////////////////////////////////////////////
 
 //Función para eliminar el mapa de calor y el botón
 function removeHeatmap(){
-	map.removeLayer(heatmapLayer);
-	map.removeControl(button);
+    // Se elimina la última instancia de heatmapLayer en la lista
+    const heatmapLayer = heatmapLayerList.pop();
+    map.removeLayer(heatmapLayer);
+    const button = buttonList.pop();
+    map.removeControl(button);
 }

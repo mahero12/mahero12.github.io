@@ -64,6 +64,12 @@ function loadJSONAndAddMarkers1(map,total){
 
 function loadJSONAndAddMarkersAlert(map, total, filtro){
 	markers.clearLayers();
+	if(heatmapLayer && Object.keys(heatmapLayerList).length !== 0){
+	removeHeatmap();
+	}
+	if(polylineLayer && Object.keys(polyLineLayerList).length !== 0){
+	polylineLayer.setStyle({ color: 'transparent' });
+	}
 	alert('Selecciona una categoría en el menú inferior para ver sus elementos');
 	contador=0;
 	fetch('JSON/salida10000.json')
@@ -71,7 +77,7 @@ function loadJSONAndAddMarkersAlert(map, total, filtro){
 		.then(data => {
 			// Set para que las URI sean únicas y no estén repetidas
 			const loadedURIs = new Set();
-	if(total<=10){
+			if(total<=10){
 			// Agregue la leyenda al mapa
 				legend4.addTo(map);
 				document.querySelector('.leyenda1').style.display = 'flex';
@@ -113,6 +119,12 @@ function loadJSONAndAddMarkersAlert(map, total, filtro){
 function loadJSONAndAddMarkers2(map, total, filtro){
 	contador=0;
 	markers.clearLayers();
+	if(heatmapLayer && Object.keys(heatmapLayerList).length !== 0){
+	removeHeatmap();
+	}
+	if(polylineLayer && Object.keys(polyLineLayerList).length !== 0){
+	polylineLayer.setStyle({ color: 'transparent' });
+	}
 	fetch('JSON/salida10000.json')
 		.then(response => response.json())
 		.then(data => {

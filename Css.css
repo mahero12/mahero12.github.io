@@ -1,5 +1,19 @@
 @charset "UTF-8";
 
+
+.custom-icon {
+  background-color: orange;
+  border-radius: 50%;
+  text-align: center;
+  color: white;
+  font-weight: bold;
+  line-height: 25px;
+}
+
+.icon-label {
+  font-size: 12px;
+}
+
 .myclustericon {
 	background-color: blue;
 	border-radius: 100%;
@@ -12,6 +26,17 @@
 /* Clase para los iconos de los marcadores de un cluster */
 .myclustericon2 {
 	opacity: 0 !important;
+}
+.botonEliminar {
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  border-radius: 4px;
+  border: none;
+  cursor: pointer;
+  margin-top: 40px; 
 }
 
 .marker-button {
@@ -85,48 +110,10 @@
 	background-color: #cc66cc;
 	color: white;
 }
-/* Clases de los marcadores */
-.green-marker {
-	background-color: #33cc33;
-	color: white;
-}
 
-.red-marker {
-	background-color: red;
-	color: white;
-}
-
-.orange-marker {
-	background-color: orange;
-	color: white;
-}
-
-.yellow-marker {
-	background-color: yellow;
-	color: black;
-}
-
-.gray-marker {
-	background-color: #999999;
-	color: white;
-}
-
-.white-marker {
-	background-color: #ffffff;
-	color: black;
-}
-/* Clases de los marcadores */
-.black-marker {
-	background-color: #000000;
-	color: white;
-}
-
-.violet-marker {
-	background-color: #cc66cc;
-	color: white;
-}
 /* Clase para las leyendas */
 .leyenda {
+	position: absolute;
 	display: none;
 	background-color: #fff;
 	border: 1px solid #ccc;
@@ -134,7 +121,7 @@
 	width: 470px;
 	height: 80px;
 	align-items: center;
-	transform: translate(-100%, 0);
+	transform: translate(-130%, 0);
 	text-align: center;
 }
 .leyenda1 {
@@ -149,6 +136,7 @@
 	text-align: center;
 }
 .leyenda2 {
+	position: absolute;
 	display: none;
 	background-color: #fff;
 	border: 1px solid #ccc;
@@ -160,6 +148,7 @@
 	text-align: center;
 }
 .leyenda3 {
+	position: absolute;
 	display: none;
 	background-color: #fff;
 	border: 1px solid #ccc;
@@ -187,7 +176,7 @@
 	margin-right: 5px;
 	border-radius: 50%;
 }
-
+/* Colores circulos leyendas */
 .green {
 	background-color: #33cc33;
 }
@@ -244,9 +233,9 @@
 	border-radius: 5px;
 	box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
 	padding: 10px;
-	float: left;
-	margin-right: 10px;
-	width: 300px;
+	width: 1330px; 
+  	height: 80px;
+  	text-align: center; /* Agregado */
 }
 
 .menu-header {
@@ -255,18 +244,26 @@
 	align-items: center;
 	padding: 10px;
 	background-color: #f2f2f2;
+	width: 1310px; 
+	height:20px;
+	text-align:center;
 }
 
 .menu-header h1 {
-	font-size: 20px;
+	position:absolute;
+	margin-left: 640px; 
+	font-size: 25px;
 	font-weight: bold;
-	margin: 0;
+	text-align:center;
+	align-items: center;
 }
 
 .menu-items {
-	list-style: none;
-	margin: 0;
-	padding: 0;
+  display:flex;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  font-size: 12px;
 }
 
 .menu-items li {

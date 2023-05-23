@@ -21,9 +21,10 @@
 
 
 	<div id="map" style="height: 100vh;"></div>
-	<script
-		src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.js"></script>
 	<script src="https://unpkg.com/leaflet.heat@0.2.0/dist/leaflet-heat.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/leaflet.heat@0.2.0/dist/leaflet-heat.js"></script>
+	
 	<script
 		src="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.4.1/leaflet.markercluster.js"></script>
 
@@ -103,7 +104,7 @@
 ///////////////////////////////////////////////////////CREAMOS MAPA Y MARCADORES/////////////////////////////////////////////////////////////////////////////
 
       var bounds = L.latLngBounds([36.9681, -10.7000], [44.2917, 5.7200]);
-      var map = L.map('map').setView([39.4699, -0.3763], 5);
+      var map = L.map('map').setView([45.4699, -0.3763], 5);
       map.setMinZoom(2);
       L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
         attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors',
@@ -111,21 +112,21 @@
         maxBounds: bounds
       }).addTo(map);
       
-    //Creamos marcador para el archivo JSON
-     const markers = L.markerClusterGroup({
-  showCoverageOnHover: false,
-  chunkedLoading: true,
-  chunkInterval: 100,
-  markerCLusterSize:20,
-  spiderLegPolylineOptions: { opacity: 0 },
-  iconCreateFunction: function(cluster) {
-    return L.divIcon({ html: '<b>' + cluster.getChildCount() + '</b>', className: 'myclustericon' });
-  }
-});
-markers.addTo(map);
+   // Creamos el marcador para el archivo JSON
+      const markers = L.markerClusterGroup({
+        showCoverageOnHover: false,
+        chunkedLoading: true,
+        chunkInterval: 100,
+        maxClusterRadius: 20, // Limita el número de marcadores en cada clúster
+        spiderLegPolylineOptions: { opacity: 0 },
+        iconCreateFunction: function(cluster) {
+          return L.divIcon({ html: '<b>' + cluster.getChildCount() + '</b>', className: 'myclustericon' });
+        }
+      });
+      markers.addTo(map);
 
 ///////////////////////////////////////////////////////CREAMOS MENÚ PRINCIPAL/////////////////////////////////////////////////////////////////////////////
-
+ 
 	//Creamos el menu
 
       var Menu = L.Control.extend({
@@ -138,11 +139,19 @@ markers.addTo(map);
               <h1>Menú</h1>
             </div>
             <ul class="menu-items">
-            <li><a onclick="loadJSONAndAddMarkers1(map)" class="boton" role="button">PRIMERA TÉCNICA: NIVELES GRANULARIDAD</a>
-            <li><a onclick="loadJSONAndAddMarkers2(map)" class="boton" role="button">SEGUNDA TÉCNICA: NIVELES GRANULARIDAD</a>
-            <li><a onclick="loadJSONAndAddMarkers3(map)" class="boton" role="button">PRIMERA TÉCNICA: MÚLTIPLES LOCALIZACIONES</a>
-            <li><a onclick="loadJSONAndAddMarkers4(map)" class="boton" role="button">SEGUNDA TÉCNICA: MÚLTIPLES LOCALIZACIONES</a>
-          </ul>`;
+            <li><a onclick="loadJSONAndAddMarkers1(map, 10)" class="boton" role="button">PRIMERA TÉCNICA 10</a>
+            <li><a onclick="loadJSONAndAddMarkers1(map, 100)" class="boton" role="button">PRIMERA TÉCNICA 100</a>
+            <li><a onclick="loadJSONAndAddMarkers1(map, 1000)" class="boton" role="button">PRIMERA TÉCNICA 1000</a>
+            <li><a onclick="loadJSONAndAddMarkersAlert(map, 10)" class="boton" role="button">SEGUNDA TÉCNICA 10</a>
+            <li><a onclick="loadJSONAndAddMarkersAlert(map, 100)" class="boton" role="button">SEGUNDA TÉCNICA 100</a>
+            <li><a onclick="loadJSONAndAddMarkersAlert(map, 1000)" class="boton" role="button">SEGUNDA TÉCNICA 1000</a>
+            <li><a onclick="loadJSONAndAddMarkers3(map, 10)" class="boton" role="button">TERCERA TÉCNICA 10</a>
+            <li><a onclick="loadJSONAndAddMarkers3(map, 100)" class="boton" role="button">TERCERA TÉCNICA 100</a>
+            <li><a onclick="loadJSONAndAddMarkers3(map, 1000)" class="boton" role="button">TERCERA TÉCNICA 1000</a>
+            <li><a onclick="loadJSONAndAddMarkers4(map, 10)" class="boton" role="button">CUARTA TÉCNICA 10</a>
+            <li><a onclick="loadJSONAndAddMarkers4(map, 100)" class="boton" role="button">CUARTA TÉCNICA 100</a>
+            <li><a onclick="loadJSONAndAddMarkers4(map, 1000)" class="boton" role="button">CUARTA TÉCNICA 1000</a>
+            </ul>`;
           return menuDiv;
           
         },
@@ -168,10 +177,10 @@ markers.addTo(map);
 		    '<div><span class="marker-icon red"></span>País </div>' +
 		    '<div><span class="marker-icon orange"></span>Bosque </div>' +
 		    '<div><span class="marker-icon yellow"></span>Montaña </div>' +
-		    '<div><span class="marker-icon gray"></span>Parque </div>' +
+		    '<div><span class="marker-icon violet"></span>Parque </div>' +
 		    '<div><span class="marker-icon white"></span>Carretera </div>' +
 		    '<div><span class="marker-icon black"></span>Plaza/Calle </div>' +
-		    '<div><span class="marker-icon violet"></span>Agua </div>';
+		    '<div><span class="marker-icon blue"></span>Agua </div>';
 		  return div;
 		};
 
@@ -188,19 +197,62 @@ markers.addTo(map);
 		  div.style.bottom = '10px';
 		  div.innerHTML = 
 			'<div class="leyenda-titulo">Seleccione:</div>' +
-		    '<div><button class="marker-button" onclick="loadJSONAndAddMarkers2(map, \'P\')"style="background-color: green;"></button>Ciudad</div>' +
-		    '<div><button class="marker-button" onclick="loadJSONAndAddMarkers2(map, \'A\')"style="background-color: red;"></button>País</div>' +
-		    '<div><button class="marker-button" onclick="loadJSONAndAddMarkers2(map, \'V\')"style="background-color: orange;"></button>Bosque  </div>' +
-		    '<div><button class="marker-button" onclick="loadJSONAndAddMarkers2(map, \'T\')"style="background-color: yellow;"></button>Montaña  </div>' +
-		    '<div><button class="marker-button" onclick="loadJSONAndAddMarkers2(map, \'L\')"style="background-color: gray;"></button>Parque  </div>' +
-		    '<div><button class="marker-button" onclick="loadJSONAndAddMarkers2(map, \'R\')"style="background-color: white;"></button>Carretera  </div>' +
-		    '<div><button class="marker-button" onclick="loadJSONAndAddMarkers2(map, \'S\')"style="background-color: black;"></button>Plaza/Calle  </div>' +
-		    '<div><button class="marker-button" onclick="loadJSONAndAddMarkers2(map, \'H\') "style="background-color: violet;"></button>Agua</div>'+
-		    '<div><button class="marker-button" onclick="loadJSONAndAddMarkers21(map) "style="background-color: blue;"></button>Todos</div>';
+		    '<div><button class="marker-button" onclick="loadJSONAndAddMarkers2(map,10, \'P\')"style="background-color: green;"></button>Ciudad</div>' +
+		    '<div><button class="marker-button" onclick="loadJSONAndAddMarkers2(map,10, \'A\')"style="background-color: red;"></button>País</div>' +
+		    '<div><button class="marker-button" onclick="loadJSONAndAddMarkers2(map,10, \'V\')"style="background-color: orange;"></button>Bosque  </div>' +
+		    '<div><button class="marker-button" onclick="loadJSONAndAddMarkers2(map,10, \'T\')"style="background-color: yellow;"></button>Montaña  </div>' +
+		    '<div><button class="marker-button" onclick="loadJSONAndAddMarkers2(map,10, \'L\')"style="background-color: violet;"></button>Parque  </div>' +
+		    '<div><button class="marker-button" onclick="loadJSONAndAddMarkers2(map,10, \'R\')"style="background-color: white;"></button>Carretera  </div>' +
+		    '<div><button class="marker-button" onclick="loadJSONAndAddMarkers2(map,10, \'S\')"style="background-color: black;"></button>Plaza/Calle  </div>' +
+		    '<div><button class="marker-button" onclick="loadJSONAndAddMarkers2(map,10, \'H\') "style="background-color: blue;"></button>Agua</div>'+
+		    '<div><button class="marker-button" onclick="loadJSONAndAddMarkers21(map,10) "style="background-color: gray;"></button>Todos</div>';
 		  return div;
 		};
 
+		//creamos la leyenda para nivel de granularidad 2
+		var legend100 = L.control({position: 'bottomright'});
+
+		// Función para generar el contenido de la leyenda
+		legend100.onAdd = function (map) {
+		  var div = L.DomUtil.create('div', 'leyenda1');
+		  div.style.display = 'flex';
+		  div.style.bottom = '10px';
+		  div.innerHTML = 
+			'<div class="leyenda-titulo">Seleccione:</div>' +
+		    '<div><button class="marker-button" onclick="loadJSONAndAddMarkers2(map,100, \'P\')"style="background-color: green;"></button>Ciudad</div>' +
+		    '<div><button class="marker-button" onclick="loadJSONAndAddMarkers2(map,100, \'A\')"style="background-color: red;"></button>País</div>' +
+		    '<div><button class="marker-button" onclick="loadJSONAndAddMarkers2(map,100, \'V\')"style="background-color: orange;"></button>Bosque  </div>' +
+		    '<div><button class="marker-button" onclick="loadJSONAndAddMarkers2(map,100, \'T\')"style="background-color: yellow;"></button>Montaña  </div>' +
+		    '<div><button class="marker-button" onclick="loadJSONAndAddMarkers2(map,100, \'L\')"style="background-color: violet;"></button>Parque  </div>' +
+		    '<div><button class="marker-button" onclick="loadJSONAndAddMarkers2(map,100, \'R\')"style="background-color: white;"></button>Carretera  </div>' +
+		    '<div><button class="marker-button" onclick="loadJSONAndAddMarkers2(map,100, \'S\')"style="background-color: black;"></button>Plaza/Calle  </div>' +
+		    '<div><button class="marker-button" onclick="loadJSONAndAddMarkers2(map,100, \'H\') "style="background-color: blue;"></button>Agua</div>'+
+		    '<div><button class="marker-button" onclick="loadJSONAndAddMarkers21(map,100) "style="background-color: gray;"></button>Todos</div>';
+		  return div;
+		};
 		
+		//creamos la leyenda para nivel de granularidad 2
+		var legend1000 = L.control({position: 'bottomright'});
+
+		// Función para generar el contenido de la leyenda
+		legend1000.onAdd = function (map) {
+		  var div = L.DomUtil.create('div', 'leyenda1');
+		  div.style.display = 'flex';
+		  div.style.bottom = '10px';
+		  div.innerHTML = 
+			'<div class="leyenda-titulo">Seleccione:</div>' +
+		    '<div><button class="marker-button" onclick="loadJSONAndAddMarkers2(map,1000, \'P\')"style="background-color: green;"></button>Ciudad</div>' +
+		    '<div><button class="marker-button" onclick="loadJSONAndAddMarkers2(map,1000, \'A\')"style="background-color: red;"></button>País</div>' +
+		    '<div><button class="marker-button" onclick="loadJSONAndAddMarkers2(map,1000, \'V\')"style="background-color: orange;"></button>Bosque  </div>' +
+		    '<div><button class="marker-button" onclick="loadJSONAndAddMarkers2(map,1000, \'T\')"style="background-color: yellow;"></button>Montaña  </div>' +
+		    '<div><button class="marker-button" onclick="loadJSONAndAddMarkers2(map,1000, \'L\')"style="background-color: violet;"></button>Parque  </div>' +
+		    '<div><button class="marker-button" onclick="loadJSONAndAddMarkers2(map,1000, \'R\')"style="background-color: white;"></button>Carretera  </div>' +
+		    '<div><button class="marker-button" onclick="loadJSONAndAddMarkers2(map,1000, \'S\')"style="background-color: black;"></button>Plaza/Calle  </div>' +
+		    '<div><button class="marker-button" onclick="loadJSONAndAddMarkers2(map,1000, \'H\') "style="background-color: blue;"></button>Agua</div>'+
+		    '<div><button class="marker-button" onclick="loadJSONAndAddMarkers21(map,1000) "style="background-color: gray;"></button>Todos</div>';
+		  return div;
+		};
+
 ////////////////////////////////////////////CREAMOS LEYENDA PARA TÉCNICA 1: MÚLTIPLES LOCALIZACIONES/////////////////////////////////////////////////////////////////////////////
 
 		//creamos la leyenda para múltiples localizaciones 1

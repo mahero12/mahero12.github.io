@@ -17,7 +17,7 @@ function loadJSONAndAddMarkers1(map, total){
 	Ciudad.clearLayers();
 	Bosque.clearLayers();
 	Calles.clearLayers();
-	alert('Según el nivel de zoom puede ver distintas categorías de los marcadores');
+	alert('Según el nivel de zoom puede ver los marcadores de las distintas categorías');
 	
 	if(heatmapLayer && Object.keys(heatmapLayerList).length !== 0){
 	removeHeatmap();

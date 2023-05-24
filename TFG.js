@@ -899,7 +899,7 @@ function loadJSONAndAddMarkers4(map,total) {
 			const loadedURIs = new Set();
 			// Carga los marcadores de salida3
 			// Agregue la leyenda al mapa
-			alert('Los elementos con el mismo color son el mismo objeto en distintas localizaciones');
+			alert('Los elementos con el mismo color son el mismo objeto en distintas localizaciones a excepción de los marcadores azules que son los que no tienen múltiples localizaciones');
 			let numeroMarcadores=0;
 			for (let item in data.results.bindings) {
 				if(numeroMarcadores<total){

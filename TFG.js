@@ -9,6 +9,55 @@ let buttonList=[];
 let polyLineLayerList=[];
 
 
+
+function loadJSONAndAddMarkers0(map,total){
+	markers.clearLayers();
+	Pais.clearLayers();
+	Ciudad.clearLayers();
+	Bosque.clearLayers();
+	Calles.clearLayers();
+	alert('Aquí podrá ver todos los marcadores sin ninguna técnica');
+	if(heatmapLayer && Object.keys(heatmapLayerList).length !== 0){
+	removeHeatmap();
+	}
+	if(polylineLayer && Object.keys(polyLineLayerList).length !== 0){
+	polylineLayer.setStyle({ color: 'transparent' });
+	}
+	fetch('JSON/salida10000.json')
+		.then(response => response.json())
+		.then(data => {
+			// Set para que las URI sean únicas y no estén repetidas
+			const loadedURIs = new Set();
+			let numeroMarcadores=0;
+			
+			// Carga los marcadores de salida3
+			for (let item in data.results.bindings) {
+				if(numeroMarcadores<total){
+					
+                let punto = data.results.bindings[item];
+                const valorUri = punto.object.value;
+                const lat = punto.lat.value;
+                const lng = punto.long.value;
+                const label = punto.objectlabel.value;
+                const popupContent = `<b>${label}</b><br>${punto.placename.value}`;
+                const marker = L.marker([lat, lng], {
+                        uri: valorUri,
+                    })
+                    .bindPopup(popupContent)
+                    .addTo(markers)
+                loadedURIs.add(valorUri);
+                numeroMarcadores ++;
+				}else{
+					break;
+				}
+			}
+	})
+		.catch(error => console.error('Error cargando el archivo JSON:', error));
+}
+
+
+
+
 //////////////////////////////////////////////BOTÓN 1//SOLUCIÓN 1 A DIFERENTE NIVEL DE GRANULARIDAD/////////////////////////////////////////////////////////////////////////////
 function loadJSONAndAddMarkers1(map, total){
 	contador=0;
@@ -1131,3 +1180,346 @@ function eliminarLinea(){
     
     
 }
+
+//////////////////////////////////////////////////////TÉCNICAS Y FUNCIONES ANTIGUAS/////////////////////////////////////////////////////////////////
+
+//BOTÓN 1//SOLUCIÓN 1 A DIFERENTE NIVEL DE GRANULARIDAD// ETIQUETAS COLORES
+/*function loadJSONAndAddMarkers1(map,total){
+	markers.clearLayers();
+	if(heatmapLayer && Object.keys(heatmapLayerList).length !== 0){
+	removeHeatmap();
+	}
+	if(polylineLayer && Object.keys(polyLineLayerList).length !== 0){
+	polylineLayer.setStyle({ color: 'transparent' });
+	}
+	fetch('JSON/salida10000.json')
+		.then(response => response.json())
+		.then(data => {
+			const loadedURIs = new Set();
+			// Agregue la leyenda al mapa
+			alert('Para saber la categoría de cada elemento, haz clic en su marcador');
+			legend.addTo(map);
+			document.querySelector('.leyenda').style.display = 'flex';
+
+			// ocultar la leyenda si se llama a otra función
+			document.querySelector('.menu-items').addEventListener('click', function() {
+				document.querySelector('.leyenda').style.display = 'none';
+			});
+			let numeroMarcadores=0;
+			for (let item in data.results.bindings) {
+				if(numeroMarcadores<total){
+				let punto = data.results.bindings[item];
+				const valorUri = punto.object.value;
+				let valorPlace = punto.place.value;
+				const lat = punto.lat.value;
+				const lng = punto.long.value;
+				const label = punto.objectlabel.value;
+
+				const popupContent = `<b>${label}</b><br>${punto.placename.value}`;
+				const marker = L.marker([lat, lng], {
+					uri: valorUri,
+					id: valorPlace.split('/')[3]
+				})
+					.bindPopup(popupContent)
+					.addTo(markers);
+				loadedURIs.add(valorUri);
+				marker.on('click', consultarClase);
+				numeroMarcadores ++;
+				}else{
+					break;
+				}
+			}
+		})
+		.catch(error => console.error('Error cargando el archivo JSON:', error));
+}
+*/
+
+
+//////////////////////////DEFINIMOS EL COLOR DE LA ETIQUETA SEGÚN SU CATEGORÍA PARA TÉCNICA 1:NIVEL DE GRANULARIDAD//////////////////////////////////////////////////////////////////////////////////////////
+/**
+ * Consulta el servicio a partir de un marker y cambia el color de fondo y texto del popup en función de la clase
+ */
+/*
+function consultarClase(e) {
+	let marker = e.target;
+	let id = marker.options.id;
+	let clase = getClassByPlace(id);
+	let fondo = 'violet'; // establecer una clase por defecto si no se encuentra una clase adecuada en las condiciones siguientes
+
+	if (clase) {
+		switch (clase) { // usar una sentencia switch para evaluar el valor de valorPlace
+			case 'P': fondo = 'green'; break;
+			case 'A': fondo = 'red'; break;
+			case 'V': fondo = 'orange'; break;
+			case 'T': fondo = 'yellow'; break;
+			case 'L': fondo = 'violey'; break;
+			case 'R': fondo = 'white'; break;
+			case 'S': fondo = 'black'; break;
+			case 'H': fondo = 'blue'; break;
+		}
+	}
+
+	let popup = marker.getPopup();
+	let estiloPopup = popup.getElement().children[0].style;
+	estiloPopup.background = fondo;
+	estiloPopup.color = getColorLetraByFondo(fondo);
+}
+*/
+//////////////////////////////////DEFINIMOS COLOR DEL TEXTO DE ETIQUETAS PARA TÉCNICA 1:NIVEL DE GRANULARIDAD//////////////////////////////////////////////////////////////////////////////////////////
+
+
+/**
+ * Obtiene el color del texto en función del color del fondo. Por defecto la letra es negra
+ */
+/*
+function getColorLetraByFondo(fondo) {
+	let color = 'black';
+
+	switch (fondo) {
+		case 'green':
+		case 'red':
+		case 'black':
+		case 'violet':
+		case 'blue':
+			color = 'white';
+			break;
+	}
+
+	return color;
+}
+*/
+
+
+///////////////////////////CREA MAPA DE CALOR EN LA LOCALIZACIÓN DE MARCADOR SECUNDARIO PARA TÉCNICA 2:MÚLTIPLES LOCALIZACIONES//////////////////////////////////////////////////////////////////////////////////////////
+
+/*
+ * Funcion que crea un mapa de calor 
+ */
+/*
+function anadirMapaCalor(event){
+	
+	// Se obtiene la URI del marcador naranja sobre el que se ha hecho clic
+	const uri = event.target.options.uri;
+
+	// Se buscan los marcadores que tengan la misma URI que el marcador naranja
+	const marcadoresURI = findMarcadoresByUriFalse(uri);
+	const marcadoresURI2 = findMarcadoresByUri(uri);
+	// Se crea un array con las coordenadas de los marcadores encontrados
+	const coords = marcadoresURI.map(marcador => [marcador.getLatLng().lat, marcador.getLatLng().lng]);
+	const coords2=marcadoresURI2.map(marcador => [marcador.getLatLng().lat, marcador.getLatLng().lng]);
+	// Se crea el mapa de calor con el array de coordenadas
+	
+	
+	heatmapLayer = L.heatLayer(coords, {
+		radius: 50,
+		blur: 20,
+		minOpacity: 0.5,
+		gradient: { 0.1: '#f44336', 0.2: '#ff9800', 0.4: '#ffc107', 0.6: '#8bc34a', 0.8: '#03a9f4', 1: '#9c27b0' }
+	}, {
+		maxZoom: 18,
+    	minZoom: 5,
+		pane: 'overlayPane',
+	}).addTo(map);
+	
+	
+	// Se añade la nueva instancia de heatmapLayer a la lista
+    heatmapLayerList.push(heatmapLayer);
+	
+	
+	heatmapLayer2 = L.heatLayer(coords2, {
+		radius: 50,
+		blur: 20,
+		minOpacity: 0.5,
+		gradient: { 0.1: '#f44336', 0.2: '#ff9800', 0.4: '#ffc107', 0.6: '#8bc34a', 0.8: '#03a9f4', 1: '#9c27b0' }
+	}, {
+		maxZoom: 18,
+    	minZoom: 5,
+		pane: 'overlayPane',
+	}).addTo(map);
+	
+	// Se añade la nueva instancia de heatmapLayer a la lista
+    heatmapLayerList.push(heatmapLayer2);
+	// Se obtiene el contenido de la etiqueta del primer marcador
+	const popupContent = marcadoresURI[0].options.popupContent;
+	const popupContent2 = marcadoresURI2[0].options.popupContent;
+	// Se crea la etiqueta para el mapa de calor
+	const etiqueta = L.popup()
+		.setLatLng(coords[0]) // Las coordenadas de la etiqueta son las del primer marcador
+		.setContent(popupContent);
+	
+	// Se agrega la etiqueta al mapa de calor
+	etiqueta.addTo(map);
+	
+	// Se hace que la etiqueta aparezca automáticamente
+	etiqueta.openPopup();
+	
+
+	// Se añade un botón para eliminar el mapa de calor
+	button = L.control({ position: 'topleft' });
+	button.onAdd = function() {
+		const div = L.DomUtil.create('div', 'leaflet-bar leaflet-control');
+		div.innerHTML = '<button class="botonEliminar" onclick="removeHeatmap()">Eliminar mapa de calor</button>';
+		return div;
+	};
+	button.addTo(map);
+	buttonList.push(button);
+	
+}
+*/
+//////////////////////////////////ELIMINA MAPA DE CALOR PARA TÉCNICA 2:MÚLTIPLES LOCALIZACIONES//////////////////////////////////////////////////////////////////////////////////////////
+/*
+//Función para eliminar el mapa de calor y el botón
+function removeHeatmap(){
+    // Se elimina la última instancia de heatmapLayer en la lista
+    const heatmapLayer = heatmapLayerList.pop();
+    map.removeLayer(heatmapLayer);
+    const heatmapLayer2 = heatmapLayerList.pop();
+    map.removeLayer(heatmapLayer2);
+    const button = buttonList.pop();
+    map.removeControl(button);
+}
+
+*/
+
+
+//////////////////////////////////////////////////////BOTÓN 4//SOLUCIÓN 2 A MÚLTIPLES LOCALIZACIONES////////////////////////////////////////////////////////////////////////////////////////////////////
+//BOTÓN 4//SOLUCIÓN 2 A MÚLTIPLES LOCALIZACIONES
+/*
+function loadJSONAndAddMarkers5(map,total) {
+	//L.Icon.Default.prototype.options.className = 'transparent-marker';
+	markers.clearLayers();
+	Pais.clearLayers();
+	Ciudad.clearLayers();
+	Bosque.clearLayers();
+	Calles.clearLayers();
+	if(heatmapLayer && Object.keys(heatmapLayerList).length !== 0){
+	removeHeatmap();
+	}
+	if(polylineLayer && Object.keys(polyLineLayerList).length !== 0){
+	polylineLayer.setStyle({ color: 'transparent' });
+	}
+	fetch('JSON/salida10000.json')
+		.then(response => response.json())
+		.then(data => {
+			// Set para que las URI sean únicas y no estén repetidas
+			const loadedURIs = new Set();
+			// Carga los marcadores de salida3
+			// Agregue la leyenda al mapa
+			legend3.addTo(map);
+			document.querySelector('.leyenda3').style.display = 'flex';
+			// ocultar la leyenda si se llama a otra función
+			document.querySelector('.menu-items').addEventListener('click', function() {
+				document.querySelector('.leyenda3').style.display = 'none';
+			});
+			let numeroMarcadores=0;
+			for (let item in data.results.bindings) {
+				if(numeroMarcadores<total){
+				let punto = data.results.bindings[item];
+				const valorUri = punto.object.value;
+				const lat = punto.lat.value;
+				const lng = punto.long.value;
+				const label = punto.objectlabel.value;
+				const placename = punto.placename.value;
+				const popupContent = `<b>${label}</b><br>${punto.placename.value}`;
+				// verifica si la uri no ha sido cargada
+				if (!loadedURIs.has(valorUri)) {
+					const marker = L.marker([lat, lng], {
+						uri: valorUri,
+						principal: true,
+						placename: placename,
+						popupContent: popupContent
+					})
+						.bindPopup(popupContent)
+						.addTo(markers);
+					// agrega la uri actual a loadedURIs
+					loadedURIs.add(valorUri);
+				} else {
+					// Si la URI ya ha sido cargada, crea el marcador y le agrega la clase leaf-transparent
+					const markerHtmlStyles = `
+              background-color: #FF0000;
+              width: 2rem;
+              height: 2rem;
+              display: block;
+              left: -1.5rem;
+              top: -1.5rem;
+              position: relative;
+              border-radius: 3rem 3rem 0;
+              transform: rotate(45deg);
+              border: 1px solid #FFFFFF`;
+					const labelMarkerStyle = `
+              color:white;
+              transform: rotate(-45deg);
+              width: 2rem;
+              height: 2rem;
+              text-align: center;
+              font-size: 0.75rem;
+              padding-top: 5px;
+              font-weight: bold;
+              `;
+					const customIconLabel = L.divIcon({
+						className: "leaf-transparent",
+						iconAnchor: [-8, 16],
+						labelAnchor: [-6, 0],
+						popupAnchor: [0, -36],
+						html: `<span style="${markerHtmlStyles}"><p style="${labelMarkerStyle}">7</p></span>`,
+					});
+
+					const marker = L.marker([lat, lng], {
+						uri: valorUri,
+						icon: customIconLabel,
+						principal: false,
+						placename: placename,
+						popupContent: popupContent
+					})
+						.bindPopup(popupContent)
+						.addTo(markers)
+				}
+			numeroMarcadores ++;
+			}else{
+				break;
+			}
+			}
+			//SOLUCIÓN 2 A MÚLTIPLES LOCALIZACIONES
+			// Se recorre el Set de URI
+			for (let i of loadedURIs.values()) {
+				let uri = i;
+				let uriCount = 0;
+				let markerWithUri;
+				markers.eachLayer(function(layer) {
+					const layerUri = layer.options.uri;
+					if (layerUri === uri) {
+						uriCount++;
+						markerWithUri = layer;
+					}
+				});
+				if (uriCount === 1) {
+					markerWithUri.setIcon(L.icon({
+						iconUrl: 'https://cdn.rawgit.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-blue.png',
+						shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
+						iconSize: [25, 41],
+						iconAnchor: [12, 41],
+						popupAnchor: [1, -34],
+						shadowSize: [41, 41]
+					}));
+				}
+				if (uriCount >= 2) {
+					// Si  hay un marcador con principal=true y q no sea único, cambiamos el color del primer marcador con esa URI
+					let marcadoresURI = findMarcadoresByUri(uri);
+					let marcadorOrange = marcadoresURI[0];
+					marcadorOrange.setIcon(L.icon({
+						iconUrl: 'https://cdn.rawgit.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-orange.png',
+						shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
+						iconSize: [25, 41],
+						iconAnchor: [12, 41],
+						popupAnchor: [1, -34],
+						shadowSize: [41, 41]
+					}));
+					// Añadimos el evento click al marcador del icono naranja para que añada/elimine un marcador amarillo 
+					//en las posiciones de los otros marcadores con la misma uri
+					marcadorOrange.on('click', anadirMapaCalor);
+				}
+			}
+		})
+		.catch(error => console.error('Error cargando el archivo JSON:', error));
+}
+*/

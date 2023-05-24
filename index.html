@@ -180,6 +180,14 @@
               <h1>Menú</h1>
             </div>
             <ul class="menu-items">
+		        <li class="dropdown">
+		            <a class="boton" role="button">SIN TÉCNICAS</a>
+		            <ul class="dropdown-content">
+		              <li><a onclick="loadJSONAndAddMarkers0(map, 10)">10 Datos</a></li>
+		              <li><a onclick="loadJSONAndAddMarkers0(map, 100)">100 Datos</a></li>
+		              <li><a onclick="loadJSONAndAddMarkers0(map, 1000)">1000 Datos</a></li>
+		            </ul>
+		        </li>
 	            <li class="dropdown">
 		            <a class="boton" role="button">PRIMERA TÉCNICA</a>
 		            <ul class="dropdown-content">
@@ -221,7 +229,8 @@
 
       // Añade el control personalizado al mapa
       var menu = new Menu({ position: 'topright' }).addTo(map);
-  
+  	
+      
 ///////////////////////////////////////////////CREAMOS LEYENDA PARA TÉCNICA 1: NIVEL DE GRANULARIDAD/////////////////////////////////////////////////////////////////////////////
 
       //creamos la leyenda para nivel de granularidad 

@@ -7,7 +7,26 @@
   font-weight: bold;
   line-height: 25px;
 }
-
+.foto10-leyenda {
+  width: 50px; /* Ajusta el ancho deseado */
+  height: 50px; /* Ajusta la altura deseada */
+}
+.foto30-leyenda {
+  width: 60px; /* Ajusta el ancho deseado */
+  height: 60px; /* Ajusta la altura deseada */
+}
+.foto50-leyenda {
+  width: 50px; /* Ajusta el ancho deseado */
+  height:50px; /* Ajusta la altura deseada */
+}
+.foto70-leyenda {
+  width: 50px; /* Ajusta el ancho deseado */
+  height:50px; /* Ajusta la altura deseada */
+}
+.foto90-leyenda {
+  width: 40px; /* Ajusta el ancho deseado */
+  height:40px; /* Ajusta la altura deseada */
+}
 .icon-label {
   font-size: 12px;
 }
@@ -121,6 +140,18 @@
 	align-items: center;
 	transform: translate(-130%, 0);
 	text-align: center;
+}
+.mensaje {
+	position: absolute;
+	background-color: #fff;
+	border: 1px solid #ccc;
+	padding: 10px;
+	width: 380px;
+	height: 80px;
+	align-items: center;
+	transform: translate(-230%, 0);
+	text-align: center;
+	flex-direction:colum;
 }
 .leyenda1 {
 	display: none;

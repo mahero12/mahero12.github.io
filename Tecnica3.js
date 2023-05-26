@@ -346,7 +346,7 @@ function anadirMarcadoresSecundarios(uri){
 function anadirMarcadoresSecundariosCluster(uri){
 	let marcadoresURI2 = findMarcadoresByUriFalse(uri);
 	let marcadoresURI = findMarcadoresByUri(uri);
-
+	clusterclickRealizado=false;
 	for (let j = 0; j < marcadoresURI2.length; j++) {
 		let punto = marcadoresURI2[j];
 		let popup = punto.getPopup().getContent();

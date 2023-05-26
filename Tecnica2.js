@@ -8,7 +8,7 @@ function loadJSONAndAddMarkers2(map, total){
 	Bosque.clearLayers();
 	Calles.clearLayers();
 	
-	if(heatmapLayer && Object.keys(heatmapLayerList).length !== 0){
+	if(Object.keys(heatmapLayerList).length !== 0){
 	removeHeatmap();
 	}
 	if(polylineLayer && Object.keys(polyLineLayerList).length !== 0){

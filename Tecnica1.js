@@ -9,7 +9,7 @@ function loadJSONAndAddMarkers1(map, total){
 	Calles.clearLayers();
 	alert('Según el nivel de zoom puede ver los marcadores de las distintas categorías');
 	
-	if(heatmapLayer && Object.keys(heatmapLayerList).length !== 0){
+	if(Object.keys(heatmapLayerList).length !== 0){
 	removeHeatmap();
 	}
 	if(polylineLayer && Object.keys(polyLineLayerList).length !== 0){

@@ -26,18 +26,19 @@
 	<script src="https://cdn.jsdelivr.net/npm/heatmap.js/build/heatmap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/heatmap.js/2.0.2/heatmap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/heatmap.js/2.0.2/heatmap.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/heatmap.js/2.0.2/plugins/leaflet-heatmap/leaflet-heatmap.js"></script>
-	
+  
 	<script src="./js/heatmap.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.4.1/leaflet.markercluster.js"></script>
+	
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.5.3/leaflet.markercluster.js"></script>
+	
 	<script>
-///////////////////////////////////////////////////////GESTIÓN DEL API DE GEONAMES/////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////GESTIÓN DEL API DE GEONAMES/////////////////////////////////////////////////////////////////////////////
     	// Gestión del API de GeoNames
     	const usuarios = ["mahero8", "mahero9","maherox","mahero123","mahero12","mahero13","mahero16","mahero17","mahero18","mahero19","mahero20","mahero21",];
     	const ficheros = ["JSON/salida10000.json", "JSON/salida2.json"];
     	let puntosUnicos = new Set();
 	  	let mapaClases = new Map();
-
+		
 	  	function consultarFicheros() {
 	  		for (let i = 0; i < ficheros.length; i++) {
 	  			fetch(ficheros[i])
@@ -65,6 +66,7 @@
 
 	  		document.getElementsByClassName("menu leaflet-control")[0].style.display = 'block';
 	  	}
+	  	
 ////////////////////////////////////////////PETICIÓN SÍNCRONA AL API DE GEONAMES/////////////////////////////////////////////////////////////////////////////
 
 	  	// Envía una petición síncrona al API de GeoNames
@@ -114,17 +116,19 @@
       }).addTo(map);
       
    // Creamos el marcador para el archivo JSON
-      const markers = L.markerClusterGroup({
-        showCoverageOnHover: false,
-        chunkedLoading: true,
-        chunkInterval: 100,
-        maxClusterRadius: 20, // Limita el número de marcadores en cada clúster
-        spiderLegPolylineOptions: { opacity: 0 },
-        iconCreateFunction: function(cluster) {
-          return L.divIcon({ html: '<b>' + cluster.getChildCount() + '</b>', className: 'myclustericon' });
-        },
-      });
-      markers.addTo(map);
+      const markers = new  L.MarkerClusterGroup({
+		  showCoverageOnHover: false,
+		  chunkedLoading: true,
+		  chunkInterval: 100,
+		  maxClusterRadius: 20,
+		  spiderLegPolylineOptions: { opacity: 0 },
+		  iconCreateFunction: function (cluster) {
+			const childCount = cluster.getChildCount();
+		    return L.divIcon({ html: '<b>' + cluster.getChildCount() + '</b>', className: 'myclustericon' });
+		  },
+		});
+		markers.addTo(map);
+
 	
       
       const Ciudad = L.markerClusterGroup({

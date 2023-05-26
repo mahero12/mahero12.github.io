@@ -22,11 +22,11 @@ function loadJSONAndAddMarkers4(map, total) {
 			const loadedURIs = new Set();
 			alert('Haz clic en un marcador principal para ver sus múltiples localizaciones');
 			// Agregue la leyenda al mapa
-			legend2.addTo(map);
+			legend3.addTo(map);
 			document.querySelector('.leyenda2').style.display = 'flex';
 			// ocultar la leyenda si se llama a otra función
 			document.querySelector('.menu-items').addEventListener('click', function() {
-				document.querySelector('.leyenda2').style.display = 'none';
+				document.querySelector('.leyenda3').style.display = 'none';
 			});
 			let numeroMarcadores=0;
 			// Carga los marcadores de salida3

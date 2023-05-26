@@ -9,7 +9,7 @@ function loadJSONAndAddMarkers4(map, total) {
 	Ciudad.clearLayers();
 	Bosque.clearLayers();
 	Calles.clearLayers();
-	if(heatmapLayer && Object.keys(heatmapLayerList).length !== 0){
+	if(Object.keys(heatmapLayerList).length !== 0){
 	removeHeatmap();
 	}
 	if(polylineLayer && Object.keys(polyLineLayerList).length !== 0){
@@ -133,7 +133,7 @@ function loadJSONAndAddMarkers4(map, total) {
 						shadowSize: [41, 41]
 					}));
 					// Añadimos el evento click al marcador del icono naranja para que añada/elimine un marcador amarillo en las posiciones de los otros marcadores con la misma uri
-					marcadorOrange.on('click', anadirMapaCalor2);
+					marcadorOrange.on('click', anadirMapaCalor);
 				}
 			}
 
@@ -141,9 +141,9 @@ function loadJSONAndAddMarkers4(map, total) {
 		.catch(error => console.error('Error cargando el archivo JSON:', error));
 }
 
+///////////////////////////CALCULA PUNTO MEDIO PARA TÉCNICA 2:MÚLTIPLES LOCALIZACIONES//////////////////////////////////////////////////////////////////////////////////////////
 
 
-///////////////////////////CREA MAPA DE CALOR EN LA LOCALIZACIÓN DE MARCADOR SECUNDARIO PARA TÉCNICA 2:MÚLTIPLES LOCALIZACIONES//////////////////////////////////////////////////////////////////////////////////////////
 function calculateMidpoint(coord1, coord2) {
   var lat1 = coord1[0];
   var lng1 = coord1[1];
@@ -155,10 +155,10 @@ function calculateMidpoint(coord1, coord2) {
 
   return [midpointLat, midpointLng];
 }
+///////////////////////////CREA MAPA DE CALOR EN LA LOCALIZACIÓN DE MARCADOR SECUNDARIO PARA TÉCNICA 2:MÚLTIPLES LOCALIZACIONES//////////////////////////////////////////////////////////////////////////////////////////
 
 
-function anadirMapaCalor2(event){
-	
+function anadirMapaCalor(event){
 	// Se obtiene la URI del marcador naranja sobre el que se ha hecho clic
 	const uri = event.target.options.uri;
 	// Se buscan los marcadores que tengan la misma URI que el marcador naranja
@@ -194,30 +194,27 @@ function anadirMapaCalor2(event){
 	  var lng = coords[0][1] * (1 - t) + coords2[0][1] * t;
 	  interpolatedPoints.push([lat, lng]);
 	}
-	
 	// Agregar los puntos intermedios al objeto data con count: 1
 	interpolatedPoints.forEach(coordinates => {
 	  data.data.push({ lat: coordinates[0], lng: coordinates[1], count: 1 });
 	});
-
-  
-	var heatmapLayer = new HeatmapOverlay({
-        radius: 2,
-        maxOpacity: 0.8,
-        scaleRadius: true,
-        useLocalExtrema: true,
-        latField: 'lat',
-        lngField: 'lng',
-        valueField: 'count'
-      }).addTo(map);
-      
-
+	if(heatmapLayerList.length === 0){
+    // Si no existe, crear una nueva capa de mapa de calor y almacenarla en la variable global
+    heatmapLayer = new HeatmapOverlay({
+      radius: 2,
+      maxOpacity: 0.8,
+      scaleRadius: true,
+      useLocalExtrema: true,
+      latField: 'lat',
+      lngField: 'lng',
+      valueField: 'count'
+    }).addTo(map);
+   
+  }
       // Agregar los datos al overlay de heatmap
       heatmapLayer.setData(data);
       heatmapLayerList.push(heatmapLayer);
       
-      
-  
 	// Se añade un botón para eliminar el mapa de calor
 	button = L.control({ position: 'topleft' });
 	button.onAdd = function() {
@@ -227,10 +224,10 @@ function anadirMapaCalor2(event){
 	};
 	button.addTo(map);
 	buttonList.push(button);
-
 }
 
 //////////////////////////////////ELIMINA MAPA DE CALOR PARA TÉCNICA 2:MÚLTIPLES LOCALIZACIONES//////////////////////////////////////////////////////////////////////////////////////////
+
 
 //Función para eliminar el mapa de calor y el botón
 function removeHeatmap(){
@@ -240,7 +237,6 @@ function removeHeatmap(){
     const button = buttonList.pop();
     map.removeControl(button);
 }
-
 
 
 

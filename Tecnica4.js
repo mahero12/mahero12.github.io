@@ -170,6 +170,7 @@ function anadirMapaCalor(event){
 	var data = {
 	  data: []
 	};
+	
 	var midpoint = calculateMidpoint(coords[0], coords2[0]);
 	data.data.push({ lat: midpoint[0], lng: midpoint[1], count: 1 });
 
@@ -209,21 +210,39 @@ function anadirMapaCalor(event){
       lngField: 'lng',
       valueField: 'count'
     }).addTo(map);
-   
-  }
+  	
+	
+	  }else {
+	  // Si ya existe un heatmapLayer anterior, eliminarlo antes de crear uno nuevo
+	  const previousHeatmapLayer = heatmapLayerList.pop();
+	  map.removeLayer(previousHeatmapLayer);
+	
+	  const previousButton = buttonList.pop();
+	  map.removeControl(previousButton);
+	
+	  heatmapLayer = new HeatmapOverlay({
+	    radius: 2,
+	    maxOpacity: 0.8,
+	    scaleRadius: true,
+	    useLocalExtrema: true,
+	    latField: 'lat',
+	    lngField: 'lng',
+	    valueField: 'count'
+	  }).addTo(map);
+	  }
+ 
       // Agregar los datos al overlay de heatmap
       heatmapLayer.setData(data);
       heatmapLayerList.push(heatmapLayer);
-      
-	// Se añade un botón para eliminar el mapa de calor
-	button = L.control({ position: 'topleft' });
-	button.onAdd = function() {
+		// Se añade un botón para eliminar el mapa de calor
+		button = L.control({ position: 'topleft' });
+		button.onAdd = function() {
 		const div = L.DomUtil.create('div', 'leaflet-bar leaflet-control');
 		div.innerHTML = '<button  onclick="removeHeatmap()">Eliminar mapa de calor</button>';
 		return div;
-	};
-	button.addTo(map);
-	buttonList.push(button);
+		};
+		button.addTo(map);
+		buttonList.push(button);
 }
 
 //////////////////////////////////ELIMINA MAPA DE CALOR PARA TÉCNICA 2:MÚLTIPLES LOCALIZACIONES//////////////////////////////////////////////////////////////////////////////////////////
@@ -238,36 +257,3 @@ function removeHeatmap(){
     map.removeControl(button);
 }
 
-
-
-function anadirListado(event){
-	const uri = event.target.options.uri;
-	const marcadoresURI = findMarcadoresByUriFalse(uri);
-	const marcadoresURI2 = findMarcadoresByUri(uri);
-	const coords = marcadoresURI.map(marcador => [marcador.getLatLng().lat, marcador.getLatLng().lng]);
-	const coords2=marcadoresURI2.map(marcador => [marcador.getLatLng().lat, marcador.getLatLng().lng]);
-	
-	const popupContent = marcadoresURI[0].options.popupContent;
-	const popupContent2 = marcadoresURI2[0].options.popupContent;
-
-	//creamos la leyenda para nivel de granularidad 
-		var mensaje = L.control({position: 'bottomright'});
-		
-		// Función para generar el contenido de la leyenda
-		mensaje.onAdd = function (map) {
-		  var div = L.DomUtil.create('div', 'mensaje');
-		  div.style.bottom = '10px';
-		  div.innerHTML =
-	        '<div><button onclick="">'+popupContent+'</button></div>' +
-	      '<div><button onclick="">'+popupContent2+'</button></div>';
-	    return div;
-	  };
-	  
-	mensaje.addTo(map);
-	// ocultar la leyenda si se llama a otra función
-			document.querySelector('.menu-items').addEventListener('click', function() {
-				document.querySelector('.mensaje').style.display = 'none';
-			});
-
-
-}

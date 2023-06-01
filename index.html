@@ -17,7 +17,7 @@
 
 </head>
 
-<body>
+<body onload="loadJSONAndAddMarkers0(map, 1000)">
 
 
 	<div id="map" style="height: 100vh;"></div>
@@ -26,9 +26,7 @@
 	<script src="https://cdn.jsdelivr.net/npm/heatmap.js/build/heatmap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/heatmap.js/2.0.2/heatmap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/heatmap.js/2.0.2/heatmap.js"></script>
-  
 	<script src="./js/heatmap.js"></script>
-	
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.5.3/leaflet.markercluster.js"></script>
 	
 	<script>
@@ -131,7 +129,7 @@
 
 	
       
-      const Ciudad = L.markerClusterGroup({
+      const Preciso = L.markerClusterGroup({
           showCoverageOnHover: false,
           chunkedLoading: true,
           chunkInterval: 100,
@@ -141,7 +139,17 @@
             return L.divIcon({ html: '<b>' + cluster.getChildCount() + '</b>', className: 'myclustericon' });
           }
         })
-      const Pais = L.markerClusterGroup({
+        const Generico = L.markerClusterGroup({
+          showCoverageOnHover: false,
+          chunkedLoading: true,
+          chunkInterval: 100,
+          maxClusterRadius: 20, // Limita el número de marcadores en cada clúster
+          spiderLegPolylineOptions: { opacity: 0 },
+          iconCreateFunction: function(cluster) {
+            return L.divIcon({ html: '<b>' + cluster.getChildCount() + '</b>', className: 'myclustericon' });
+          }
+        })
+      const Abstracto = L.markerClusterGroup({
           showCoverageOnHover: false,
           chunkedLoading: true,
           chunkInterval: 100,
@@ -151,7 +159,7 @@
             return L.divIcon({ html: '<b>' + cluster.getChildCount() + '</b>', className: 'myclustericon' });
           }
         }).addTo(map);
-     const Bosque = L.markerClusterGroup({
+     const Concreto = L.markerClusterGroup({
           showCoverageOnHover: false,
           chunkedLoading: true,
           chunkInterval: 100,
@@ -161,7 +169,7 @@
             return L.divIcon({ html: '<b>' + cluster.getChildCount() + '</b>', className: 'myclustericon' });
           }
         })
-      const Calles = L.markerClusterGroup({
+      const Especifico = L.markerClusterGroup({
           showCoverageOnHover: false,
           chunkedLoading: true,
           chunkInterval: 100,
@@ -238,6 +246,7 @@
       var menu = new Menu({ position: 'topright' }).addTo(map);
   	
       
+      
 ///////////////////////////////////////////////CREAMOS LEYENDA PARA TÉCNICA 1: NIVEL DE GRANULARIDAD/////////////////////////////////////////////////////////////////////////////
 
       //creamos la leyenda para nivel de granularidad 
@@ -252,7 +261,7 @@
 			'<div class="leyenda-titulo">Leyenda:</div>' +
 		    '<div><span class="marker-icon blue"></span>Genérico </div>'+
 		    '<div><span class="marker-icon red"></span>Abstracto </div>' +
-		    '<div><span class="marker-icon green"></span>Preciso </div>' +
+		    '<div><span class="marker-icon green"></span>Preciso</div>' +
 		    '<div><span class="marker-icon violet"></span>Concreto</div>' +
 		    '<div><span class="marker-icon black"></span>Específico</div>';
 		  return div;

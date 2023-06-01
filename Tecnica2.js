@@ -3,10 +3,11 @@
 function loadJSONAndAddMarkers2(map, total){
 	contador=0;
 	markers.clearLayers();
-	Pais.clearLayers();
-	Ciudad.clearLayers();
-	Bosque.clearLayers();
-	Calles.clearLayers();
+	Generico.clearLayers();
+	Abstracto.clearLayers();
+	Preciso.clearLayers();
+	Concreto.clearLayers();
+	Especifico.clearLayers();
 	
 	if(Object.keys(heatmapLayerList).length !== 0){
 	removeHeatmap();
@@ -46,185 +47,164 @@ function loadJSONAndAddMarkers2(map, total){
 						 // usar una sentencia switch para evaluar el valor de valorPlace
 						case  'P': 
 								contador ++;
-								const markerIconP = new L.icon({
-								  iconUrl: 'img/50.png',
-								  shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-shadow.png',
-								  iconSize: [35, 41],
+								const markerIconP = L.divIcon({
+								  className: 'custom-icon2',
+								  html: `<div class="marker-label">50%</div>`,
+								  iconSize: [25, 41],
 								  iconAnchor: [12, 41],
 								  popupAnchor: [1, -34],
 								  shadowSize: [41, 41],
 								});
-
+								
 								const popupContentP = `<b>${label}</b><br>${punto.placename.value}`;
-								const popupOptionsP = {
-									className: popupClass,
-								};
+								
+								
 								const markerP = L.marker([lat, lng], {
-									icon: markerIconP,
-									uri: valorUri,
+								  icon: markerIconP,
+								  uri: valorUri,
 								})
-									.bindPopup(popupContentP, popupOptionsP)
-									.addTo(markers);
+								  .bindPopup(popupContentP)
+								  .addTo(Preciso);
+								
 								loadedURIs.add(valorUri);
 								break;
-						case 'A': popupClass = 'red-popup';
-							markerColor = 'red';
+						case 'A':
 								contador ++;
-								const markerIconA = L.icon({
-									iconUrl: 'img/30.png',
-									shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-shadow.png',
-									iconSize: [35, 41],
-									iconAnchor: [12, 41],
-									popupAnchor: [1, -34],
-									shadowSize: [41, 41],
+								const markerIconA = L.divIcon({
+								className: 'custom-icon2',
+								  html: `<div class="marker-label">30%</div>`,
+								  iconSize: [25, 41],
+								  iconAnchor: [12, 41],
+								  popupAnchor: [1, -34],
+								  shadowSize: [41, 41],
 								});
 								const popupContentA = `<b>${label}</b><br>${punto.placename.value}`;
-								const popupOptionsA = {
-									className: popupClass,
-								};
+								
 								const markerA = L.marker([lat, lng], {
 									icon: markerIconA,
 									uri: valorUri,
 								})
-									.bindPopup(popupContentA, popupOptionsA)
+									.bindPopup(popupContentA)
 									.addTo(markers);
 								loadedURIs.add(valorUri);
 							break;
-						case 'V': popupClass = 'violet-popup';
-							markerColor = 'violet';
+						case 'V': 
 								contador ++;
-								const markerIconV = L.icon({
-									iconUrl: 'img/70.png',
-									shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-shadow.png',
-									iconSize: [35, 41],
-									iconAnchor: [12, 41],
-									popupAnchor: [1, -34],
-									shadowSize: [41, 41],
+								const markerIconV =  L.divIcon({
+								className: 'custom-icon2',
+								  html: `<div class="marker-label">70%</div>`,
+								  iconSize: [25, 41],
+								  iconAnchor: [12, 41],
+								  popupAnchor: [1, -34],
+								  shadowSize: [41, 41],
 								});
 								const popupContentV = `<b>${label}</b><br>${punto.placename.value}`;
-								const popupOptionsV = {
-									className: popupClass,
-								};
+								
 								const markerV = L.marker([lat, lng], {
 									icon: markerIconV,
 									uri: valorUri,
 								})
-									.bindPopup(popupContentV, popupOptionsV)
+									.bindPopup(popupContentV)
 									.addTo(markers);
 								loadedURIs.add(valorUri);
 							break;
-						case 'T': popupClass = 'violet-popup';
-							markerColor = 'yellow';
+						case 'T':
 								contador ++;
-								const markerIconT = L.icon({
-									iconUrl: 'img/70.png',
-									shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-shadow.png',
-									iconSize: [35, 41],
-									iconAnchor: [12, 41],
-									popupAnchor: [1, -34],
-									shadowSize: [41, 41],
+								const markerIconT = L.divIcon({
+								className: 'custom-icon2',
+								  html: `<div class="marker-label">70%</div>`,
+								  iconSize: [25, 41],
+								  iconAnchor: [12, 41],
+								  popupAnchor: [1, -34],
+								  shadowSize: [41, 41],
 								});
 								const popupContentT = `<b>${label}</b><br>${punto.placename.value}`;
-								const popupOptionsT = {
-									className: popupClass,
-								};
+								
 								const markerT = L.marker([lat, lng], {
 									icon: markerIconT,
 									uri: valorUri,
 								})
-									.bindPopup(popupContentT, popupOptionsT)
+									.bindPopup(popupContentT)
 									.addTo(markers);
 								loadedURIs.add(valorUri);
 							break;
-						case 'L': popupClass = 'black-popup';
-							markerColor = 'black';
+						case 'L':
 								contador ++;
-								const markerIconL = L.icon({
-									iconUrl: 'img/90.png',
-									shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-shadow.png',
-									iconSize: [35, 41],
-									iconAnchor: [12, 41],
-									popupAnchor: [1, -34],
-									shadowSize: [41, 41],
+								const markerIconL =  L.divIcon({
+								className: 'custom-icon2',
+								  html: `<div class="marker-label">90%</div>`,
+								  iconSize: [25, 41],
+								  iconAnchor: [12, 41],
+								  popupAnchor: [1, -34],
+								  shadowSize: [41, 41],
 								});
 								const popupContentL = `<b>${label}</b><br>${punto.placename.value}`;
-								const popupOptionsL = {
-									className: popupClass,
-								};
+								
 								const markerL = L.marker([lat, lng], {
 									icon: markerIconL,
 									uri: valorUri,
 								})
-									.bindPopup(popupContentL, popupOptionsL)
+									.bindPopup(popupContentL)
 									.addTo(markers);
 								loadedURIs.add(valorUri);
 							 break;
-						case 'R': popupClass = 'black-popup';
-							markerColor = 'black';
+						case 'R':
 								contador ++;
-								const markerIconR = L.icon({
-									iconUrl: 'img/90.png',
-									shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-shadow.png',
-									iconSize: [35, 41],
-									iconAnchor: [12, 41],
-									popupAnchor: [1, -34],
-									shadowSize: [41, 41],
+								const markerIconR =  L.divIcon({
+								className: 'custom-icon2',
+								  html: `<div class="marker-label">90%</div>`,
+								  iconSize: [25, 41],
+								  iconAnchor: [12, 41],
+								  popupAnchor: [1, -34],
+								  shadowSize: [41, 41],
 								});
 								const popupContentR = `<b>${label}</b><br>${punto.placename.value}`;
-								const popupOptionsR = {
-									className: popupClass,
-								};
+								
 								const markerR = L.marker([lat, lng], {
 									icon: markerIconR,
 									uri: valorUri,
 								})
-									.bindPopup(popupContentR, popupOptionsR)
+									.bindPopup(popupContentR)
 									.addTo(markers);
 								loadedURIs.add(valorUri);
 							 break;
-						case 'S': popupClass = 'black-popup';
-							markerColor = 'black';
+						case 'S': 
 								contador ++;
-								const markerIconS = L.icon({
-									iconUrl: 'img/90.png',
-									shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-shadow.png',
-									iconSize: [35, 41],
-									iconAnchor: [12, 41],
-									popupAnchor: [1, -34],
-									shadowSize: [41, 41],
+								const markerIconS =  L.divIcon({
+								className: 'custom-icon2',
+								  html: `<div class="marker-label">90%</div>`,
+								  iconSize: [25, 41],
+								  iconAnchor: [12, 41],
+								  popupAnchor: [1, -34],
+								  shadowSize: [41, 41],
 								});
 								const popupContentS = `<b>${label}</b><br>${punto.placename.value}`;
-								const popupOptionsS = {
-									className: popupClass,
-								};
+								
 								const markerS = L.marker([lat, lng], {
 									icon: markerIconS,
 									uri: valorUri,
 								})
-									.bindPopup(popupContentS, popupOptionsS)
+									.bindPopup(popupContentS)
 									.addTo(markers);
 								loadedURIs.add(valorUri);
 							 break;
-						case 'H': popupClass = 'blue-popup';
-							markerColor = 'blue';
+						case 'H':
 								contador ++;
-								const markerIconH = L.icon({
-									iconUrl: 'img/10.png',
-									shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-shadow.png',
-									iconSize: [35, 41],
-									iconAnchor: [12, 41],
-									popupAnchor: [1, -34],
-									shadowSize: [41, 41],
+								const markerIconH = L.divIcon({
+								className: 'custom-icon2',
+								  html: `<div class="marker-label">10%</div>`,
+								  iconSize: [25, 41],
+								  iconAnchor: [12, 41],
+								  popupAnchor: [1, -34],
+								  shadowSize: [41, 41],
 								});
 								const popupContentH = `<b>${label}</b><br>${punto.placename.value}`;
-								const popupOptionsH = {
-									className: popupClass,
-								};
+								
 								const markerH = L.marker([lat, lng], {
 									icon: markerIconH,
 									uri: valorUri,
 								})
-									.bindPopup(popupContentH, popupOptionsH)
+									.bindPopup(popupContentH)
 									.addTo(markers);
 								loadedURIs.add(valorUri);
 							 break;	

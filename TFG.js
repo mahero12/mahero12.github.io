@@ -13,11 +13,11 @@ let listaEtiquetas=[];
 
 function loadJSONAndAddMarkers0(map,total){
 	markers.clearLayers();
-	Pais.clearLayers();
-	Ciudad.clearLayers();
-	Bosque.clearLayers();
-	Calles.clearLayers();
-	alert('Aquí podrá ver todos los marcadores sin ninguna técnica');
+	Generico.clearLayers();
+	Abstracto.clearLayers();
+	Preciso.clearLayers();
+	Concreto.clearLayers();
+	Especifico.clearLayers();
 	if(heatmapLayer && Object.keys(heatmapLayerList).length !== 0){
 	removeHeatmap();
 	}
@@ -129,11 +129,13 @@ function existeMarcadorEnPosicion(lat, lng){
 	return encontrado;
 }
 
+
 /////////////////////////////CREA LÍNEA ENTRE MARCADOR PRINCIPAL Y SECUNDARIO PARA TÉCNICA 1:MÚLTIPLES LOCALIZACIONES//////////////////////////////////////////////////////////////////////////////////////////
 
 /*
  * Funcion que crea una linea entre los objetos con multiples localizaciones
  */
+
 function crearLinea(marcador1, marcador2){
 	const latlngs = [
 		[marcador1.getLatLng().lat, marcador1.getLatLng().lng],
@@ -145,6 +147,9 @@ function crearLinea(marcador1, marcador2){
 	polyLineLayerList.push(polylineLayer);
 	
 }
+
+
+
 /////////////////////////////ELIMINAR LÍNEA ENTRE MARCADOR PRINCIPAL Y SECUNDARIO PARA TÉCNICA 1:MÚLTIPLES LOCALIZACIONES//////////////////////////////////////////////////////////////////////////////////////////
 
 //Función para eliminar el mapa de calor y el botón
@@ -155,6 +160,18 @@ function eliminarLinea(){
     
 }
 
+
+//////////////////////////////////ELIMINA MAPA DE CALOR PARA TÉCNICA 2:MÚLTIPLES LOCALIZACIONES//////////////////////////////////////////////////////////////////////////////////////////
+
+
+//Función para eliminar el mapa de calor y el botón
+function removeHeatmap(){
+    // Se elimina la última instancia de heatmapLayer en la lista
+    const heatmapLayer = heatmapLayerList.pop();
+    map.removeLayer(heatmapLayer);
+    const button = buttonList.pop();
+    map.removeControl(button);
+}
 
 
 //////////////////////////////////////////////////////TÉCNICAS Y FUNCIONES ANTIGUAS/////////////////////////////////////////////////////////////////

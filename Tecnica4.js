@@ -5,10 +5,11 @@
 function loadJSONAndAddMarkers4(map, total) {
 	//L.Icon.Default.prototype.options.className = 'transparent-marker';
 	markers.clearLayers();
-	Pais.clearLayers();
-	Ciudad.clearLayers();
-	Bosque.clearLayers();
-	Calles.clearLayers();
+	Generico.clearLayers();
+	Abstracto.clearLayers();
+	Preciso.clearLayers();
+	Concreto.clearLayers();
+	Especifico.clearLayers();
 	if(Object.keys(heatmapLayerList).length !== 0){
 	removeHeatmap();
 	}
@@ -20,13 +21,12 @@ function loadJSONAndAddMarkers4(map, total) {
 		.then(data => {
 			// Set para que las URI sean únicas y no estén repetidas
 			const loadedURIs = new Set();
-			alert('Haz clic en un marcador principal para ver sus múltiples localizaciones');
 			// Agregue la leyenda al mapa
-			legend3.addTo(map);
-			document.querySelector('.leyenda3').style.display = 'flex';
+			legend2.addTo(map);
+			document.querySelector('.leyenda2').style.display = 'flex';
 			// ocultar la leyenda si se llama a otra función
 			document.querySelector('.menu-items').addEventListener('click', function() {
-				document.querySelector('.leyenda3').style.display = 'none';
+				document.querySelector('.leyenda2').style.display = 'none';
 			});
 			let numeroMarcadores=0;
 			// Carga los marcadores de salida3
@@ -244,16 +244,3 @@ function anadirMapaCalor(event){
 		button.addTo(map);
 		buttonList.push(button);
 }
-
-//////////////////////////////////ELIMINA MAPA DE CALOR PARA TÉCNICA 2:MÚLTIPLES LOCALIZACIONES//////////////////////////////////////////////////////////////////////////////////////////
-
-
-//Función para eliminar el mapa de calor y el botón
-function removeHeatmap(){
-    // Se elimina la última instancia de heatmapLayer en la lista
-    const heatmapLayer = heatmapLayerList.pop();
-    map.removeLayer(heatmapLayer);
-    const button = buttonList.pop();
-    map.removeControl(button);
-}
-

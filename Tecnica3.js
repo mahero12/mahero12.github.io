@@ -1,4 +1,6 @@
 var clusterclickRealizado;
+marcadores2=[];
+marcadoresNaranjasCluster=[];
 //////////////////////////////////////////////////////BOTÓN 3//SOLUCIÓN 1 A MÚLTIPLES LOCALIZACIONES////////////////////////////////////////////////////////////////////////////////////////////////////
 //BOTÓN 3//SOLUCIÓN 1 A MÚLTIPLES LOCALIZACIONES
 function loadJSONAndAddMarkers3(map, total) {
@@ -165,10 +167,58 @@ function loadJSONAndAddMarkers3(map, total) {
 
 
 function anadirMarcadoresSecundarios(uri){
-	
+	const markerHtmlStyles = `
+              background-color: #FF0000;
+              width: 2rem;
+              height: 2rem;
+              display: block;
+              left: -1.5rem;
+              top: -1.5rem;
+              position: relative;
+              border-radius: 3rem 3rem 0;
+              transform: rotate(45deg);
+              border: 1px solid #FFFFFF`;
+					const labelMarkerStyle = `
+              color:white;
+              transform: rotate(-45deg);
+              width: 2rem;
+              height: 2rem;
+              text-align: center;
+              font-size: 0.75rem;
+              padding-top: 5px;
+              font-weight: bold;
+              `;
+					const customIconLabel = L.divIcon({
+						className: "leaf-transparent",
+						iconAnchor: [-8, 16],
+						labelAnchor: [-6, 0],
+						popupAnchor: [0, -36],
+						html: `<span style="${markerHtmlStyles}"><p style="${labelMarkerStyle}">7</p></span>`,
+					});
+
+
+	if (marcadores2.length !== 0) {
+	  for (let i = 0; i < marcadores2.length; i++) {
+	    const marcador = marcadores2[i];
+	    marcador.setIcon(customIconLabel);
+	  }
+	if (!markers.hasLayer(marcadorSecundario) && map.hasLayer(marcadorSecundario)) {
+					  // Agregar el marcador al clúster
+					  markers.addLayer(marcadorSecundario);
+					  // Eliminar el marcador del mapa
+					  map.removeLayer(marcadorSecundario);
+	}
+	if (!markers.hasLayer(marcadorPrincipal) && map.hasLayer(marcadorPrincipal)) {
+					  // Agregar el marcador al clúster
+					  markers.addLayer(marcadorPrincipal);
+					  // Eliminar el marcador del mapa
+					  map.removeLayer(marcadorPrincipal);
+	}
+}
+
 	let marcadoresURI2 = findMarcadoresByUriFalse(uri);
 	let marcadoresURI = findMarcadoresByUri(uri);
-
+	
 	for (let j = 0; j < marcadoresURI2.length; j++) {
 		let punto = marcadoresURI2[j];
 		let popup = punto.getPopup().getContent();
@@ -339,8 +389,57 @@ function anadirMarcadoresSecundarios(uri){
 }
 
 function anadirMarcadoresSecundariosCluster(uri){
+	const markerHtmlStyles = `
+              background-color: #FF0000;
+              width: 2rem;
+              height: 2rem;
+              display: block;
+              left: -1.5rem;
+              top: -1.5rem;
+              position: relative;
+              border-radius: 3rem 3rem 0;
+              transform: rotate(45deg);
+              border: 1px solid #FFFFFF`;
+					const labelMarkerStyle = `
+              color:white;
+              transform: rotate(-45deg);
+              width: 2rem;
+              height: 2rem;
+              text-align: center;
+              font-size: 0.75rem;
+              padding-top: 5px;
+              font-weight: bold;
+              `;
+					const customIconLabel = L.divIcon({
+						className: "leaf-transparent",
+						iconAnchor: [-8, 16],
+						labelAnchor: [-6, 0],
+						popupAnchor: [0, -36],
+						html: `<span style="${markerHtmlStyles}"><p style="${labelMarkerStyle}">7</p></span>`,
+					});
+
+
+	if (marcadores2.length !== 0) {
+	  for (let i = 0; i < marcadores2.length; i++) {
+	    const marcador = marcadores2[i];
+	    marcador.setIcon(customIconLabel);
+	  }
+	if (!markers.hasLayer(marcadorSecundario) && map.hasLayer(marcadorSecundario)) {
+				  // Agregar el marcador al clúster
+				  markers.addLayer(marcadorSecundario);
+				  // Eliminar el marcador del mapa
+				  map.removeLayer(marcadorSecundario);
+				}
+				if (!markers.hasLayer(marcadorPrincipal) && map.hasLayer(marcadoresURI[j])) {
+				  // Agregar el marcador al clúster
+				  markers.addLayer(marcadorPrincipal);
+				  // Eliminar el marcador del mapa
+				  map.removeLayer(marcadorPrincipal);
+				}
+}
 	let marcadoresURI2 = findMarcadoresByUriFalse(uri);
 	let marcadoresURI = findMarcadoresByUri(uri);
+	marcadoresNaranjasCluster.push(marcadoresURI);
 	clusterclickRealizado=false;
 	for (let j = 0; j < marcadoresURI2.length; j++) {
 		let punto = marcadoresURI2[j];

@@ -4,10 +4,11 @@ var clusterclickRealizado;
 function loadJSONAndAddMarkers3(map, total) {
 	//L.Icon.Default.prototype.options.className = 'transparent-marker';
 	markers.clearLayers();
-	Pais.clearLayers();
-	Ciudad.clearLayers();
-	Bosque.clearLayers();
-	Calles.clearLayers();
+	Generico.clearLayers();
+	Abstracto.clearLayers();
+	Preciso.clearLayers();
+	Concreto.clearLayers();
+	Especifico.clearLayers();
 	if(Object.keys(heatmapLayerList).length !== 0){
 	removeHeatmap();
 	}
@@ -19,7 +20,6 @@ function loadJSONAndAddMarkers3(map, total) {
 		.then(data => {
 			// Set para que las URI sean únicas y no estén repetidas
 			const loadedURIs = new Set();
-			alert('Haz clic en un marcador principal para ver sus múltiples localizaciones');
 			// Agregue la leyenda al mapa
 			legend2.addTo(map);
 			document.querySelector('.leyenda2').style.display = 'flex';
@@ -181,8 +181,6 @@ function anadirMarcadoresSecundarios(uri){
 		//si no exite el marcador secundario
 		if (!existeMarcador) {
 			//abre el cluster del marcador del secundario
-			
-
 			if (markers.hasLayer(marcadoresURI2[j]) && !map.hasLayer(marcadoresURI2[j]) ) {
 			  // Eliminar el marcador del clúster
 			  markers.removeLayer(marcadoresURI2[j] );
@@ -190,14 +188,11 @@ function anadirMarcadoresSecundarios(uri){
 			  marcadoresURI2[j].addTo(map);
 			}
 
-
 			if (markers.hasLayer(marcadoresURI[j]) && !map.hasLayer(marcadoresURI2[j])) {
 			  // Eliminar el marcador del clúster
 			  markers.removeLayer(marcadoresURI[j]);
 			  // Agregar el marcador directamente al mapa
 			  marcadoresURI[j].addTo(map);
-			 
-			  
 			}
 			
 			let marcadorYellow = marcadoresURI2[j];
@@ -359,22 +354,17 @@ function anadirMarcadoresSecundariosCluster(uri){
 		//si no exite el marcador secundario
 		if (!existeMarcador) {
 			//abre el cluster del marcador del secundario
-			
-
 			if (markers.hasLayer(marcadoresURI2[j]) && !map.hasLayer(marcadoresURI2[j]) ) {
 			  // Eliminar el marcador del clúster
 			  markers.removeLayer(marcadoresURI2[j] );
 			  // Agregar el marcador directamente al mapa
 			  marcadoresURI2[j].addTo(map);
 			}
-
-
 			if (markers.hasLayer(marcadoresURI[j]) && map.hasLayer(marcadoresURI2[j])) {
 			  // Eliminar el marcador del clúster
 			  markers.removeLayer(marcadoresURI[j]);
 			  // Agregar el marcador directamente al mapa
 			  marcadoresURI[j].addTo(map);
-			 
 			  
 			}
 			
@@ -516,8 +506,11 @@ function anadirMarcadoresSecundariosCluster(uri){
 				  markers.addLayer(marcadorPrincipal);
 				  // Eliminar el marcador del mapa
 				  map.removeLayer(marcadorPrincipal);
-				  clusterclickRealizado=false;
+				  
 				}
 		});
+		
 	}
 }
+
+

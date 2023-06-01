@@ -3,11 +3,11 @@
 function loadJSONAndAddMarkers1(map, total){
 	contador=0;
 	markers.clearLayers();
-	Pais.clearLayers();
-	Ciudad.clearLayers();
-	Bosque.clearLayers();
-	Calles.clearLayers();
-	alert('Según el nivel de zoom puede ver los marcadores de las distintas categorías');
+	Generico.clearLayers();
+	Abstracto.clearLayers();
+	Preciso.clearLayers();
+	Concreto.clearLayers();
+	Especifico.clearLayers();
 	
 	if(Object.keys(heatmapLayerList).length !== 0){
 	removeHeatmap();
@@ -66,7 +66,7 @@ function loadJSONAndAddMarkers1(map, total){
 									uri: valorUri,
 								})
 									.bindPopup(popupContentP, popupOptionsP)
-									.addTo(Ciudad);
+									.addTo(Preciso);
 								loadedURIs.add(valorUri);
 								break;
 						case 'A': popupClass = 'red-popup';
@@ -89,7 +89,7 @@ function loadJSONAndAddMarkers1(map, total){
 									uri: valorUri,
 								})
 									.bindPopup(popupContentA, popupOptionsA)
-									.addTo(Pais);
+									.addTo(Abstracto);
 								loadedURIs.add(valorUri);
 							break;
 						case 'V': popupClass = 'orange-popup';
@@ -112,7 +112,7 @@ function loadJSONAndAddMarkers1(map, total){
 									uri: valorUri,
 								})
 									.bindPopup(popupContentV, popupOptionsV)
-									.addTo(Bosque);
+									.addTo(Concreto);
 								loadedURIs.add(valorUri);
 							break;
 						case 'T': popupClass = 'yellow-popup';
@@ -135,7 +135,7 @@ function loadJSONAndAddMarkers1(map, total){
 									uri: valorUri,
 								})
 									.bindPopup(popupContentT, popupOptionsT)
-									.addTo(Bosque);
+									.addTo(Concreto);
 								loadedURIs.add(valorUri);
 							break;
 						case 'L': popupClass = 'violet-popup';
@@ -158,7 +158,7 @@ function loadJSONAndAddMarkers1(map, total){
 									uri: valorUri,
 								})
 									.bindPopup(popupContentL, popupOptionsL)
-									.addTo(Calles);
+									.addTo(Especifico);
 								loadedURIs.add(valorUri);
 							 break;
 						case 'R': popupClass = 'white-popup';
@@ -181,7 +181,7 @@ function loadJSONAndAddMarkers1(map, total){
 									uri: valorUri,
 								})
 									.bindPopup(popupContentR, popupOptionsR)
-									.addTo(Calles);
+									.addTo(Especifico);
 								loadedURIs.add(valorUri);
 							 break;
 						case 'S': popupClass = 'black-popup';
@@ -204,7 +204,7 @@ function loadJSONAndAddMarkers1(map, total){
 									uri: valorUri,
 								})
 									.bindPopup(popupContentS, popupOptionsS)
-									.addTo(Calles);
+									.addTo(Especifico);
 								loadedURIs.add(valorUri);
 							 break;
 						case 'H': popupClass = 'blue-popup';
@@ -227,7 +227,7 @@ function loadJSONAndAddMarkers1(map, total){
 									uri: valorUri,
 								})
 									.bindPopup(popupContentH, popupOptionsH)
-									.addTo(Pais);
+									.addTo(Generico);
 								loadedURIs.add(valorUri);
 							 break;	
 				}
@@ -239,40 +239,49 @@ function loadJSONAndAddMarkers1(map, total){
 			map.on('zoomend', function() {
 			        var zoomLevel = map.getZoom();
 			        console.log(zoomLevel);
-			        if (zoomLevel <=4) {
-		        		if (map.hasLayer(Pais)) {
-		        	      map.removeLayer(Pais);
+			        if (zoomLevel <=3) {
+		        		if (map.hasLayer(Generico)) {
+		        	      map.removeLayer(Generico);
 		        	    }
 		        	  } else {
-		        	    if (!map.hasLayer(Pais)) {
-		        	      map.addLayer(Pais);
+		        	    if (!map.hasLayer(Generico)) {
+		        	      map.addLayer(Generico);
+		        	    }
+		        	  }
+			        if (zoomLevel <=4) {
+		        		if (map.hasLayer(Abstracto)) {
+		        	      map.removeLayer(Abstracto);
+		        	    }
+		        	  } else {
+		        	    if (!map.hasLayer(Abstracto)) {
+		        	      map.addLayer(Abstracto);
 		        	    }
 		        	  }
 		        	  if (zoomLevel <=5) {
-		        		if (map.hasLayer(Ciudad)) {
-		        	      map.removeLayer(Ciudad);
+		        		if (map.hasLayer(Preciso)) {
+		        	      map.removeLayer(Preciso);
 		        	    }
 		        	  } else {
-		        	    if (!map.hasLayer(Ciudad)) {
-		        	      map.addLayer(Ciudad);
+		        	    if (!map.hasLayer(Preciso)) {
+		        	      map.addLayer(Preciso);
 		        	    }
 		        	  }
 		        	  if (zoomLevel <=6) {
-		        		if (map.hasLayer(Bosque)) {
-		        	      map.removeLayer(Bosque);
+		        		if (map.hasLayer(Concreto)) {
+		        	      map.removeLayer(Concreto);
 		        	    }
 		        	  } else {
-		        	    if (!map.hasLayer(Bosque)) {
-		        	      map.addLayer(Bosque);
+		        	    if (!map.hasLayer(Concreto)) {
+		        	      map.addLayer(Concreto);
 		        	    }
 		        	  }
 		        	  if (zoomLevel <=7) {
-		        		if (map.hasLayer(Calles)) {
-		        	      map.removeLayer(Calles);
+		        		if (map.hasLayer(Especifico)) {
+		        	      map.removeLayer(Especifico);
 		        	    }
 		        	  } else {
-		        	    if (!map.hasLayer(Calles)) {
-		        	      map.addLayer(Calles);
+		        	    if (!map.hasLayer(Especifico)) {
+		        	      map.addLayer(Especifico);
 		        	    }
 		        	  }
 		        });

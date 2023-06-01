@@ -141,10 +141,18 @@ function crearLinea(marcador1, marcador2){
 		[marcador1.getLatLng().lat, marcador1.getLatLng().lng],
 		[marcador2.getLatLng().lat, marcador2.getLatLng().lng],
 	];
-
+	if(Object.keys(polyLineLayerList).length == 0){
 	polylineLayer = L.polyline(latlngs, { color: 'orange' }).addTo(map);
 	
 	polyLineLayerList.push(polylineLayer);
+	}else{
+	 const previouspolylineLayer = polyLineLayerList.pop();
+	  previouspolylineLayer.setStyle({ color: 'transparent' });
+	  polylineLayer = L.polyline(latlngs, { color: 'orange' }).addTo(map);
+	  polyLineLayerList.push(polylineLayer);
+
+	}
+	
 	
 }
 

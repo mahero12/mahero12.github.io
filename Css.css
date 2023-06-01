@@ -6,7 +6,37 @@
   color: white;
   font-weight: bold;
   line-height: 25px;
+  
 }
+
+.custom-icon2 {
+  position: relative;
+  background-color: #00BFFF;
+  border-radius: 50%;
+  text-align: center;
+  color: #000000;
+  font-weight: bold;
+  line-height: 25px;
+}
+
+.custom-icon .marker-label {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) skewY(-35deg);
+  background-color: #F8F8FF;
+  color: #000000;
+  width: 30px;
+  height: 20px;
+  border-radius: 50%;
+  text-align: center;
+  line-height: 20px;
+  font-size: 12px;
+}
+
+
+
+
 .foto10-leyenda {
   width: 50px; /* Ajusta el ancho deseado */
   height: 50px; /* Ajusta la altura deseada */

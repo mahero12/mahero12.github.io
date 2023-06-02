@@ -126,9 +126,7 @@
 		  },
 		});
 		markers.addTo(map);
-
-	
-      
+		
       const Preciso = L.markerClusterGroup({
           showCoverageOnHover: false,
           chunkedLoading: true,
@@ -301,8 +299,8 @@
 		  div.style.bottom = '10px';
 		  div.innerHTML = 
 			'<div class="leyenda-titulo">Leyenda:</div>' +
-		    '<div><span class="marker-icon orange"></span>Principal </div>' +
-		    '<div><span class="marker-icon yellow"></span>Secundario </div>' +
+		    '<div><span class="marker-icon orange"></span>Tiene + localizaciones </div>' +
+		    '<div><span class="marker-icon yellow"></span>Posibles localizaciones </div>' +
 		    '<div><span class="marker-icon blue"></span>No tiene </div>';
 		  return div;
 		};
@@ -319,7 +317,7 @@
 		  div.style.bottom = '10px';
 		  div.innerHTML = 
 			'<div class="leyenda-titulo">Leyenda:</div>' +
-		    '<div><span class="marker-icon orange"></span>  Principal  </div>' +
+		    '<div><span class="marker-icon orange"></span>Tiene + localizaciones </div>' +
 		    '<div><span class="marker-icon blue"></span>No tiene</div>' ;
 		  return div;
 		};

@@ -5,6 +5,7 @@
 function loadJSONAndAddMarkers4(map, total) {
 	//L.Icon.Default.prototype.options.className = 'transparent-marker';
 	markers.clearLayers();
+	sinClusters.clearLayers();
 	Generico.clearLayers();
 	Abstracto.clearLayers();
 	Preciso.clearLayers();
@@ -22,11 +23,11 @@ function loadJSONAndAddMarkers4(map, total) {
 			// Set para que las URI sean únicas y no estén repetidas
 			const loadedURIs = new Set();
 			// Agregue la leyenda al mapa
-			legend2.addTo(map);
-			document.querySelector('.leyenda2').style.display = 'flex';
+			legend3.addTo(map);
+			document.querySelector('.leyenda3').style.display = 'flex';
 			// ocultar la leyenda si se llama a otra función
 			document.querySelector('.menu-items').addEventListener('click', function() {
-				document.querySelector('.leyenda2').style.display = 'none';
+				document.querySelector('.leyenda3').style.display = 'none';
 			});
 			let numeroMarcadores=0;
 			// Carga los marcadores de salida3
@@ -87,7 +88,7 @@ function loadJSONAndAddMarkers4(map, total) {
 						placename: placename
 					})
 						.bindPopup(popupContent)
-						.addTo(markers)
+						.addTo(sinClusters)
 				}
 				numeroMarcadores ++;
 				}else{
@@ -100,24 +101,14 @@ function loadJSONAndAddMarkers4(map, total) {
 				let uri = i;
 				let uriCount = 0;
 				let markerWithUri;
-				markers.eachLayer(function(layer) {
+				sinClusters.eachLayer(function(layer) {
 					const layerUri = layer.options.uri;
 					if (layerUri === uri) {
 						uriCount++;
 						markerWithUri = layer;
 					}
 				});
-				if (uriCount === 1) {
-					markerWithUri.setIcon(L.icon({
-						iconUrl: 'https://cdn.rawgit.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-blue.png',
-						shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
-						iconSize: [25, 41],
-						iconAnchor: [12, 41],
-						popupAnchor: [1, -34],
-						shadowSize: [41, 41]
-					}));
-				}
-				if (uriCount >= 2) {
+				if (uriCount >= 1) {
 					// Se obtienen los marcadores asociados a la URI
 					let marcadoresURI = findMarcadoresByUri(uri);
 
@@ -132,8 +123,8 @@ function loadJSONAndAddMarkers4(map, total) {
 						popupAnchor: [1, -34],
 						shadowSize: [41, 41]
 					}));
-					// Añadimos el evento click al marcador del icono naranja para que añada/elimine un marcador amarillo en las posiciones de los otros marcadores con la misma uri
 					marcadorOrange.on('click', anadirMapaCalor);
+
 				}
 			}
 

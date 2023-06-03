@@ -8,22 +8,23 @@
   line-height: 25px;
   
 }
-
 .custom-icon2 {
   position: relative;
+  width: 25px;
+  height: 40px;
   background-color: #00BFFF;
   border-radius: 50%;
   text-align: center;
   color: #000000;
   font-weight: bold;
-  line-height: 25px;
+  line-height: 40px;
 }
 
 .custom-icon .marker-label {
   position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%) skewY(-35deg);
+  transform: translate(-50%, -50%);
   background-color: #F8F8FF;
   color: #000000;
   width: 30px;
@@ -31,33 +32,6 @@
   border-radius: 50%;
   text-align: center;
   line-height: 20px;
-  font-size: 12px;
-}
-
-
-
-
-.foto10-leyenda {
-  width: 50px; /* Ajusta el ancho deseado */
-  height: 50px; /* Ajusta la altura deseada */
-}
-.foto30-leyenda {
-  width: 60px; /* Ajusta el ancho deseado */
-  height: 60px; /* Ajusta la altura deseada */
-}
-.foto50-leyenda {
-  width: 50px; /* Ajusta el ancho deseado */
-  height:50px; /* Ajusta la altura deseada */
-}
-.foto70-leyenda {
-  width: 50px; /* Ajusta el ancho deseado */
-  height:50px; /* Ajusta la altura deseada */
-}
-.foto90-leyenda {
-  width: 40px; /* Ajusta el ancho deseado */
-  height:40px; /* Ajusta la altura deseada */
-}
-.icon-label {
   font-size: 12px;
 }
 
@@ -165,46 +139,48 @@
 	background-color: #fff;
 	border: 1px solid #ccc;
 	padding: 10px;
-	width: 470px;
-	height: 80px;
-	align-items: center;
-	transform: translate(-130%, 0);
-	text-align: center;
-}
-.mensaje {
-	position: absolute;
-	background-color: #fff;
-	border: 1px solid #ccc;
-	padding: 10px;
-	width: 380px;
-	height: 80px;
-	align-items: center;
-	transform: translate(-230%, 0);
-	text-align: center;
-	flex-direction:colum;
+	width: 100px;
+	height: 350px;
+	flex-direction: column;
+	right: 10px;
 }
 .leyenda1 {
+	position: absolute;
 	display: none;
 	background-color: #fff;
 	border: 1px solid #ccc;
 	padding: 10px;
-	width: 500px;
-	height: 80px;
-	align-items: center;
-	transform: translate(-90%, 0);
-	text-align: center;
+	width: 100px;
+	height: 250px;
+	flex-direction: column;
+	right: 10px;
 }
+.leyenda-filas span:first-child {
+  font-size: 15px;
+  font-weight: bold;
+  margin-right: 5px;
+}
+
+.leyenda1 .leyenda-titulo {
+  font-weight: bold;
+}
+
+
+.leyenda1 .leyenda-texto {
+  display: flex;
+  flex-direction: column;
+}
+
 .leyenda2 {
 	position: absolute;
 	display: none;
 	background-color: #fff;
 	border: 1px solid #ccc;
 	padding: 10px;
-	width: 300px;
-	height: 80px;
-	align-items: center;
-	transform: translate(-170%, 0);
-	text-align: center;
+	width: 100px;
+	height: 350px;
+	flex-direction: column;
+	right: 10px;
 }
 .leyenda3 {
 	position: absolute;
@@ -212,11 +188,10 @@
 	background-color: #fff;
 	border: 1px solid #ccc;
 	padding: 10px;
-	width: 230px;
-	height: 80px;
-	align-items: center;
-	transform: translate(-240%, 0);
-	text-align: center;
+	width: 100px;
+	height: 250px;
+	flex-direction: column;
+	right: 10px;
 }
 
 
@@ -226,6 +201,10 @@
   font-weight: bold;
   font-size:17px;
   margin-bottom: 10px;
+}
+
+.leyenda-columna {
+  margin-left: 70px;
 }
 
 .marker-icon {

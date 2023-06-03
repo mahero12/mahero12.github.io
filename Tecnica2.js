@@ -3,6 +3,7 @@
 function loadJSONAndAddMarkers2(map, total){
 	contador=0;
 	markers.clearLayers();
+	sinClusters.clearLayers();
 	Generico.clearLayers();
 	Abstracto.clearLayers();
 	Preciso.clearLayers();

@@ -13,6 +13,7 @@ let listaEtiquetas=[];
 
 function loadJSONAndAddMarkers0(map,total){
 	markers.clearLayers();
+	sinClusters.clearLayers();
 	Generico.clearLayers();
 	Abstracto.clearLayers();
 	Preciso.clearLayers();
@@ -102,7 +103,7 @@ function findMarcadoresByUri(uri) {
 function findMarcadoresByUriFalse(uri) {
 	let marcadores = [];
 
-	markers.eachLayer(function(layer) {
+	sinClusters.eachLayer(function(layer) {
 		if (layer.options.uri === uri && layer.options.principal == false) {
 			marcadores.push(layer);
 		}

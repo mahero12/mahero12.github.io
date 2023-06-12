@@ -17,7 +17,7 @@ function loadJSONAndAddMarkers3(map, total) {
 	if(polylineLayer && Object.keys(polyLineLayerList).length !== 0){
 	polylineLayer.setStyle({ color: 'transparent' });
 	}
-	fetch('JSON/salida10000.json')
+	fetch('JSON/salidaYO.json')
 		.then(response => response.json())
 		.then(data => {
 			// Set para que las URI sean únicas y no estén repetidas
@@ -157,7 +157,7 @@ function loadJSONAndAddMarkers3(map, total) {
 
 
 function anadirMarcadoresSecundarios(uri){
-	console.log('ha entrado en primera')
+	
 	const markerHtmlStyles = `
               background-color: #FF0000;
               width: 2rem;
@@ -225,7 +225,6 @@ function anadirMarcadoresSecundarios(uri){
 			  // Agregar el marcador directamente al mapa
 			  marcadoresURI[j].addTo(map);
 			}
-			
 			let marcadorYellow = marcadoresURI2[j];
 			marcadorYellow.setIcon(L.icon({
 				iconUrl: 'https://cdn.rawgit.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-yellow.png',
@@ -292,7 +291,6 @@ function anadirMarcadoresSecundarios(uri){
 				  // Agregar el marcador directamente al mapa
 				  marcadoresURI[j].addTo(map);
 				}
-
 				crearLinea(marcadoresURI[j], marcadoresURI2[j]);
 				let marcadorYellow = marcadoresURI2[j];
 				marcadorYellow.setIcon(L.icon({
@@ -354,7 +352,7 @@ function anadirMarcadoresSecundarios(uri){
 }
 
 function anadirMarcadoresSecundariosCluster(uri){
-	console.log('ha entrado en segunda')
+	
 	const markerHtmlStyles = `
               background-color: #FF0000;
               width: 2rem;
@@ -397,8 +395,12 @@ function anadirMarcadoresSecundariosCluster(uri){
 	let marcadoresURI = findMarcadoresByUri(uri);
 	clusterclickRealizado=false;
 	for (let j = 0; j < marcadoresURI2.length; j++) {
+		let punto2 = marcadoresURI[j];
+		let popup2 = punto2.getPopup().getContent();
+		
 		let punto = marcadoresURI2[j];
 		let popup = punto.getPopup().getContent();
+		
 		let latlng = punto.getLatLng();
 		let existeMarcador = existeMarcadorEnPosicion(latlng.lat, latlng.lng);
 		marcadorSecundario=marcadoresURI2[j];
@@ -407,6 +409,9 @@ function anadirMarcadoresSecundariosCluster(uri){
 		clusterPrimario= markers.getVisibleParent(marcadoresURI[j]);
 		//si no exite el marcador secundario
 		if (!existeMarcador) {
+			
+			marcadoresURI[j].openPopup();
+			marcadoresURI2[j].openPopup();
 			
 			if (markers.hasLayer(marcadoresURI[j]) && map.hasLayer(marcadoresURI2[j])) {
 			  // Eliminar el marcador del clúster
@@ -478,6 +483,8 @@ function anadirMarcadoresSecundariosCluster(uri){
 				  // Agregar el marcador directamente al mapa
 				  marcadoresURI[j].addTo(map);
 				}
+				marcadoresURI[j].openPopup();
+				marcadoresURI2[j].openPopup();
 				crearLinea(marcadoresURI[j], marcadoresURI2[j]);
 				let marcadorYellow = marcadoresURI2[j];
 				marcadorYellow.setIcon(L.icon({

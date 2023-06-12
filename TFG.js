@@ -25,7 +25,7 @@ function loadJSONAndAddMarkers0(map,total){
 	if(polylineLayer && Object.keys(polyLineLayerList).length !== 0){
 	polylineLayer.setStyle({ color: 'transparent' });
 	}
-	fetch('JSON/salida10000.json')
+	fetch('JSON/salidaYO.json')
 		.then(response => response.json())
 		.then(data => {
 			// Set para que las URI sean únicas y no estén repetidas

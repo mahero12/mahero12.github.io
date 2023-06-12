@@ -17,7 +17,7 @@ function loadJSONAndAddMarkers4(map, total) {
 	if(polylineLayer && Object.keys(polyLineLayerList).length !== 0){
 	polylineLayer.setStyle({ color: 'transparent' });
 	}
-	fetch('JSON/salida10000.json')
+	fetch('JSON/salidaYO.json')
 		.then(response => response.json())
 		.then(data => {
 			// Set para que las URI sean únicas y no estén repetidas
@@ -156,30 +156,34 @@ function anadirMapaCalor(event){
 	const marcadoresURI = findMarcadoresByUriFalse(uri);
 	const marcadoresURI2 = findMarcadoresByUri(uri);
 	// Se crea un array con las coordenadas de los marcadores encontrados
+	
 	const coords = marcadoresURI.map(marcador => [marcador.getLatLng().lat, marcador.getLatLng().lng]);
 	const coords2=marcadoresURI2.map(marcador => [marcador.getLatLng().lat, marcador.getLatLng().lng]);
+	
 	var data = {
 	  data: []
 	};
 	
-	var midpoint = calculateMidpoint(coords[0], coords2[0]);
-	data.data.push({ lat: midpoint[0], lng: midpoint[1], count: 1 });
-
 	// Agregar las coordenadas de los marcadores al objeto data
 	for (var i = 0; i < coords.length; i++) {
-	  data.data.push({ lat: coords[i][0], lng: coords[i][1], count: 3 });
+	  data.data.push({ lat: coords[i][0], lng: coords[i][1], count: 4 });
 	}
 	
 	// Agregar las coordenadas de los marcadores2 al objeto data
 	for (var i = 0; i < coords2.length; i++) {
 	  data.data.push({ lat: coords2[i][0], lng: coords2[i][1], count: 3 });
 	}
-	// Calcular la línea que conecta los puntos
-	var lineCoordinates = [coords[0], midpoint, coords2[0]];
+	
 	var interpolatedPoints = [];
+	if(coords[0][1]>40){
+		var numInterpolatedPoints = 60;
+	}
+	else{
+		var numInterpolatedPoints = 10;
+	}
 	
 	// Calcular los puntos intermedios
-	var numInterpolatedPoints = 10; // Número de puntos intermedios deseados
+	 // Número de puntos intermedios deseados
 	for (var i = 0; i < numInterpolatedPoints; i++) {
 	  var t = i / (numInterpolatedPoints - 1);
 	  var lat = coords[0][0] * (1 - t) + coords2[0][0] * t;
@@ -190,36 +194,35 @@ function anadirMapaCalor(event){
 	interpolatedPoints.forEach(coordinates => {
 	  data.data.push({ lat: coordinates[0], lng: coordinates[1], count: 1 });
 	});
+	
 	if(heatmapLayerList.length === 0){
-    // Si no existe, crear una nueva capa de mapa de calor y almacenarla en la variable global
-    heatmapLayer = new HeatmapOverlay({
-      radius: 2,
-      maxOpacity: 0.8,
-      scaleRadius: true,
-      useLocalExtrema: true,
-      latField: 'lat',
-      lngField: 'lng',
-      valueField: 'count'
-    }).addTo(map);
-  	
-	
+	  // Si no existe, crear una nueva capa de mapa de calor y almacenarla en la variable global
+		  heatmapLayer = new HeatmapOverlay({
+		    radius: 2,
+		    maxOpacity: 0.8,
+		    scaleRadius: true,
+		    useLocalExtrema: true,
+		    latField: 'lat',
+		    lngField: 'lng',
+		    valueField: 'count'
+		  }).addTo(map);
 	  }else {
-	  // Si ya existe un heatmapLayer anterior, eliminarlo antes de crear uno nuevo
-	  const previousHeatmapLayer = heatmapLayerList.pop();
-	  map.removeLayer(previousHeatmapLayer);
-	
-	  const previousButton = buttonList.pop();
-	  map.removeControl(previousButton);
-	
-	  heatmapLayer = new HeatmapOverlay({
-	    radius: 2,
-	    maxOpacity: 0.8,
-	    scaleRadius: true,
-	    useLocalExtrema: true,
-	    latField: 'lat',
-	    lngField: 'lng',
-	    valueField: 'count'
-	  }).addTo(map);
+		  // Si ya existe un heatmapLayer anterior, eliminarlo antes de crear uno nuevo
+		  const previousHeatmapLayer = heatmapLayerList.pop();
+		  map.removeLayer(previousHeatmapLayer);
+		
+		  const previousButton = buttonList.pop();
+		  map.removeControl(previousButton);
+		
+		  heatmapLayer = new HeatmapOverlay({
+		    radius: 2,
+		    maxOpacity: 0.8,
+		    scaleRadius: true,
+		    useLocalExtrema: true,
+		    latField: 'lat',
+		    lngField: 'lng',
+		    valueField: 'count'
+		  }).addTo(map);
 	  }
  
       // Agregar los datos al overlay de heatmap

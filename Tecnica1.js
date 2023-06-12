@@ -16,7 +16,7 @@ function loadJSONAndAddMarkers1(map, total){
 	if(polylineLayer && Object.keys(polyLineLayerList).length !== 0){
 	polylineLayer.setStyle({ color: 'transparent' });
 	}
-	fetch('JSON/salida10000.json')
+	fetch('JSON/salidaYO.json')
 		.then(response => response.json())
 		.then(data => {
 			// Set para que las URI sean únicas y no estén repetidas
@@ -41,6 +41,7 @@ function loadJSONAndAddMarkers1(map, total){
 				const label = punto.objectlabel.value;
 				let valorPlace = punto.place.value;
 				let clase = mapaClases.get(valorPlace.split('/')[3]);
+				let code = mapaCodes.get(valorPlace.split('/')[3]);
 				let popupClass = 'gray-popup'; // establecer una clase por defecto si no se encuentra una clase 
 				let markerColor = 'gray';
 				//SOLUCIÓN 2 A DIFERENTE NIVEL DE GRANULARIDAD
@@ -50,48 +51,170 @@ function loadJSONAndAddMarkers1(map, total){
 						case  'P': popupClass = 'green-popup';
 							markerColor = 'green';
 								contador ++;
-								const markerIconP = L.icon({
-									iconUrl: `https://cdn.rawgit.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-${markerColor}.png`,
+								 switch (code) {
+								    case 'PPLA':
+								      // Verde más oscuro
+								       const markerVerdeOscuro = L.icon({
+									iconUrl: 'img/verdeOscuro.png',
 									shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-shadow.png',
 									iconSize: [25, 41],
 									iconAnchor: [12, 41],
 									popupAnchor: [1, -34],
 									shadowSize: [41, 41],
 								});
-								const popupContentP = `<b>${label}</b><br>${punto.placename.value}`;
-								const popupOptionsP = {
+								const popupContentVerdeOscuro = `<b>${label}</b><br>${punto.placename.value}`;
+								const popupOptionsVerdeOscuro = {
 									className: popupClass,
 								};
-								const markerP = L.marker([lat, lng], {
-									icon: markerIconP,
+								const markerVOscuro = L.marker([lat, lng], {
+									icon: markerVerdeOscuro,
 									uri: valorUri,
 								})
-									.bindPopup(popupContentP, popupOptionsP)
+									.bindPopup(popupContentVerdeOscuro, popupOptionsVerdeOscuro)
 									.addTo(Preciso);
 								loadedURIs.add(valorUri);
+								      break;
+								    case 'PPLA3':
+								      // Verde 
+								      const markerVerde = L.icon({
+									iconUrl: 'https://cdn.rawgit.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-green.png',
+									shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-shadow.png',
+									iconSize: [25, 41],
+									iconAnchor: [12, 41],
+									popupAnchor: [1, -34],
+									shadowSize: [41, 41],
+								});
+								const popupContentVerde = `<b>${label}</b><br>${punto.placename.value}`;
+								const popupOptionsVerde = {
+									className: popupClass,
+								};
+								const markerV = L.marker([lat, lng], {
+									icon: markerVerde,
+									uri: valorUri,
+								})
+									.bindPopup(popupContentVerde, popupOptionsVerde)
+									.addTo(Preciso);
+								loadedURIs.add(valorUri);
+								      break;
+								    case 'PPLA2':
+								      // Verde más claro
+								     const markerVerdeClaro = L.icon({
+									iconUrl: 'img/verdeClaro.png',
+									shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-shadow.png',
+									iconSize: [35, 41],
+									iconAnchor: [12, 41],
+									popupAnchor: [1, -34],
+									shadowSize: [41, 41],
+								});
+								const popupContentVerdeClaro = `<b>${label}</b><br>${punto.placename.value}`;
+								const popupOptionsVerdeClaro = {
+									className: popupClass,
+								};
+								const markerVClaro = L.marker([lat, lng], {
+									icon: markerVerdeClaro,
+									uri: valorUri,
+								})
+									.bindPopup(popupContentVerdeClaro, popupOptionsVerdeClaro)
+									.addTo(Preciso);
+								loadedURIs.add(valorUri);
+								     break;
+								    default:
+								      // Rojo predeterminado
+								      const markerVerdeDefault = L.icon({
+									iconUrl: 'https://cdn.rawgit.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-green.png',
+									shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-shadow.png',
+									iconSize: [25, 41],
+									iconAnchor: [12, 41],
+									popupAnchor: [1, -34],
+									shadowSize: [41, 41],
+								});
+								const popupContentVerdeDefault = `<b>${label}</b><br>${punto.placename.value}`;
+								const popupOptionsVerdeDefault = {
+									className: popupClass,
+								};
+								const markerVDefault = L.marker([lat, lng], {
+									icon: markerVerdeDefault,
+									uri: valorUri,
+								})
+									.bindPopup(popupContentVerdeDefault, popupOptionsVerdeDefault)
+									.addTo(Preciso);
+								loadedURIs.add(valorUri);
+								      break;
+								  }
+								
 								break;
 						case 'A': popupClass = 'red-popup';
 							markerColor = 'red';
 								contador ++;
-								const markerIconA = L.icon({
-									iconUrl: `https://cdn.rawgit.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-${markerColor}.png`,
+								  switch (code) {
+								    case 'ADM3':
+								      // Rojo más oscuro
+								       const markerRojoOscuro = L.icon({
+									iconUrl: 'img/rojoOscuro.png',
 									shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-shadow.png',
 									iconSize: [25, 41],
 									iconAnchor: [12, 41],
 									popupAnchor: [1, -34],
 									shadowSize: [41, 41],
 								});
-								const popupContentA = `<b>${label}</b><br>${punto.placename.value}`;
-								const popupOptionsA = {
+								const popupContentRojoOscuro  = `<b>${label}</b><br>${punto.placename.value}`;
+								const popupOptionsRojoOscuro  = {
 									className: popupClass,
 								};
-								const markerA = L.marker([lat, lng], {
-									icon: markerIconA,
+								const markerROscuro = L.marker([lat, lng], {
+									icon: markerRojoOscuro,
 									uri: valorUri,
 								})
-									.bindPopup(popupContentA, popupOptionsA)
+									.bindPopup(popupContentRojoOscuro , popupOptionsRojoOscuro )
 									.addTo(Abstracto);
 								loadedURIs.add(valorUri);
+								      break;
+								    case 'PCLI':
+								      // Rojo 
+								       const markerRojoClaro = L.icon({
+									iconUrl: 'https://cdn.rawgit.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-red.png',
+									shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-shadow.png',
+									iconSize: [25, 41],
+									iconAnchor: [12, 41],
+									popupAnchor: [1, -34],
+									shadowSize: [41, 41],
+								});
+								const popupContentRojoClaro  = `<b>${label}</b><br>${punto.placename.value}`;
+								const popupOptionsRojoClaro  = {
+									className: popupClass,
+								};
+								const markerRClaro  = L.marker([lat, lng], {
+									icon: markerRojoClaro,
+									uri: valorUri,
+								})
+									.bindPopup(popupContentRojoClaro , popupOptionsRojoClaro )
+									.addTo(Abstracto);
+								loadedURIs.add(valorUri);
+								      break;
+								    default:
+								      // Rojo predeterminado
+								      const markerRojoDefault = L.icon({
+									iconUrl: 'https://cdn.rawgit.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-red.png',
+									shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-shadow.png',
+									iconSize: [25, 41],
+									iconAnchor: [12, 41],
+									popupAnchor: [1, -34],
+									shadowSize: [41, 41],
+								});
+								const popupContentRojoDefault = `<b>${label}</b><br>${punto.placename.value}`;
+								const popupOptionsRojoDefault = {
+									className: popupClass,
+								};
+								const markerRDefault = L.marker([lat, lng], {
+									icon: markerRojoDefault,
+									uri: valorUri,
+								})
+									.bindPopup(popupContentRojoDefault, popupOptionsRojoDefault)
+									.addTo(Abstracto);
+								loadedURIs.add(valorUri);
+								      break;
+								  }
+								
 							break;
 						case 'V': popupClass = 'orange-popup';
 							markerColor = 'orange';
@@ -142,25 +265,75 @@ function loadJSONAndAddMarkers1(map, total){
 						case 'L': popupClass = 'violet-popup';
 							markerColor = 'violet';
 								contador ++;
-								const markerIconL = L.icon({
-									iconUrl: `https://cdn.rawgit.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-${markerColor}.png`,
+								switch (code) {
+								    case 'PRK':
+								      // Rojo más oscuro
+								      const markerVioletaOscuro = L.icon({
+									iconUrl: 'img/violetaOscuro.png',
+									shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-shadow.png',
+									iconSize: [35, 41],
+									iconAnchor: [12, 41],
+									popupAnchor: [1, -34],
+									shadowSize: [41, 41],
+								});
+								const popupContentVioletaOscuro = `<b>${label}</b><br>${punto.placename.value}`;
+								const popupOptionsVioletaOscuro = {
+									className: popupClass,
+								};
+								const markerViOscuro = L.marker([lat, lng], {
+									icon: markerVioletaOscuro,
+									uri: valorUri,
+								})
+									.bindPopup(popupContentVioletaOscuro, popupOptionsVioletaOscuro)
+									.addTo(Especifico);
+								loadedURIs.add(valorUri);
+								      break;
+								    case 'RGN':
+								      // Rojo más claro
+								       const markerVioletaClaro = L.icon({
+									iconUrl: 'img/violetaClaro.png',
+									shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-shadow.png',
+									iconSize: [35, 41],
+									iconAnchor: [12, 41],
+									popupAnchor: [1, -34],
+									shadowSize: [41, 41],
+								});
+								const popupContentVioletaClaro = `<b>${label}</b><br>${punto.placename.value}`;
+								const popupOptionsVioletaClaro = {
+									className: popupClass,
+								};
+								const markerViClaro = L.marker([lat, lng], {
+									icon: markerVioletaClaro,
+									uri: valorUri,
+								})
+									.bindPopup(popupContentVioletaClaro, popupOptionsVioletaClaro)
+									.addTo(Especifico);
+								loadedURIs.add(valorUri);
+								      break;
+								    default:
+								  // Violeta predeterminado
+								      const markerVioletaDefault = L.icon({
+									iconUrl: 'https://cdn.rawgit.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-violet.png',
 									shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-shadow.png',
 									iconSize: [25, 41],
 									iconAnchor: [12, 41],
 									popupAnchor: [1, -34],
 									shadowSize: [41, 41],
 								});
-								const popupContentL = `<b>${label}</b><br>${punto.placename.value}`;
-								const popupOptionsL = {
+								const popupContentVioletaDefault = `<b>${label}</b><br>${punto.placename.value}`;
+								const popupOptionsVioletaDefault = {
 									className: popupClass,
 								};
-								const markerL = L.marker([lat, lng], {
-									icon: markerIconL,
+								const markerViDefault = L.marker([lat, lng], {
+									icon: markerVioletaDefault,
 									uri: valorUri,
 								})
-									.bindPopup(popupContentL, popupOptionsL)
+									.bindPopup(popupContentVioletaDefault, popupOptionsVioletaoDefault)
 									.addTo(Especifico);
 								loadedURIs.add(valorUri);
+								      break;
+								  }
+								
 							 break;
 						case 'R': popupClass = 'white-popup';
 							markerColor = 'white';
@@ -239,7 +412,7 @@ function loadJSONAndAddMarkers1(map, total){
 			}
 			map.on('zoomend', function() {
 			        var zoomLevel = map.getZoom();
-			        console.log(zoomLevel);
+			        
 			        if (zoomLevel <=3) {
 		        		if (map.hasLayer(Generico)) {
 		        	      map.removeLayer(Generico);

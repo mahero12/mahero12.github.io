@@ -36,6 +36,7 @@
     	const ficheros = ["JSON/salida10000.json", "JSON/salida2.json"];
     	let puntosUnicos = new Set();
 	  	let mapaClases = new Map();
+	  	let mapaCodes = new Map();
 		
 	  	function consultarFicheros() {
 	  		for (let i = 0; i < ficheros.length; i++) {
@@ -51,12 +52,15 @@
 	  							puntosUnicos.add(id);
 	  						}
 	  					}
-	  		
 	  		            // Carga los marcadores de salida3
 	  		            for (var it = puntosUnicos.values(), val = null; val = it.next().value; ) {
 	  		                let clase = getClassByPlace(val);
+	  		                let code = getCodeByPlace(val);
 	  		                if (clase !== "undefined") {
 	  		                	mapaClases.set(val, clase);
+	  					    }
+	  		              if (code !== "undefined") {
+	  		                	mapaCodes.set(val, code);
 	  					    }
 	  		  			}
 	  			}).catch(error => console.error('Error cargando el archivo JSON:', error));
@@ -77,6 +81,18 @@
 	  	  conexion.open("GET", url, false);
 	  	  conexion.send();      
 	  	  return JSON.parse(conexion.responseText).fcl;
+	  	}
+	  	
+	 // Envía una petición síncrona al API de GeoNames
+	  	function getCodeByPlace(id) {
+	  	  const geonamesAPI = 'https://secure.geonames.org/getJSON';
+	  	  let username = usuarios[Math.floor(Math.random() * usuarios.length)];
+	  	  const geoNameId = id;
+	  	  let url = `${geonamesAPI}?geonameId=${geoNameId}&username=${username}`;     
+	  	  var conexion = nuevaConexion();
+	  	  conexion.open("GET", url, false);
+	  	  conexion.send();      
+	  	  return JSON.parse(conexion.responseText).fcode;
 	  	}
 ////////////////////////////////////////////CREAMOS CONEXIÓN PARA LA PETICIÓN /////////////////////////////////////////////////////////////////////////////
 
@@ -264,23 +280,43 @@
 	  div.innerHTML = 
 	    '<div class="leyenda-titulo">Niveles de menor a mayor detalle:</div>' +
 	    '<div class="leyenda-filas">' +
-	      '<span class="leyenda-columna-foto marker-icon blue"></span>' +
+	      '<img src="img/azul.png" alt="10" class="fotoazul-leyenda">' +
 	      '<span class="leyenda-columna-texto">Nivel 1</span>' +
 	      '</div>' +
 	      '<div class="leyenda-filas">' +
-	      '<span class="leyenda-columna-foto marker-icon red"></span>' +
-	      '<span class="leyenda-columna-texto">Nivel 2</span>' +
+	      '<img src="img/rojoOscuro.png" alt="10" class="fotorojoOscuro-leyenda">' +
+	      '<span class="leyenda-columna-texto">Nivel 2.1</span>' +
 	      '</div>' +
 	      '<div class="leyenda-filas">' +
-	      '<span class="leyenda-columna-foto marker-icon green"> </span>' +
-	      '<span class="leyenda-columna-texto">Nivel 3</span>' +
+	      '<img src="img/rojo.png" alt="10" class="fotorojo-leyenda">' +
+	      '<span class="leyenda-columna-texto">Nivel 2.2</span>' +
 	      '</div>' +
 	      '<div class="leyenda-filas">' +
-	      '<span class="leyenda-columna-foto marker-icon violet"></span>' +
-	      '<span class="leyenda-columna-texto">Nivel 4</span>' +
+	      '<img src="img/verdeOscuro.png" alt="10" class="fotoverdeOscuro-leyenda">' +
+	      '<span class="leyenda-columna-texto">Nivel 3.1</span>' +
 	      '</div>' +
 	      '<div class="leyenda-filas">' +
-	      '<span class="leyenda-columna-foto marker-icon black"></span>' +
+	      '<img src="img/verde.png" alt="10" class="fotoverde-leyenda">' +
+	      '<span class="leyenda-columna-texto">Nivel 3.2</span>' +
+	      '</div>' +
+	      '<div class="leyenda-filas">' +
+	      '<img src="img/verdeClaro.png" alt="10" class="fotoverdeClaro-leyenda">' +
+	      '<span class="leyenda-columna-texto">Nivel 3.3</span>' +
+	      '</div>' +
+	      '<div class="leyenda-filas">' +
+	      '<img src="img/violetaOscuro.png" alt="10" class="fotovioletaOscuro-leyenda">' +
+	      '<span class="leyenda-columna-texto">Nivel 4.1</span>' +
+	      '</div>' +
+	      '<div class="leyenda-filas">' +
+	      '<img src="img/violeta.png" alt="10" class="fotovioleta-leyenda">' +
+	      '<span class="leyenda-columna-texto">Nivel 4.2</span>' +
+	      '</div>' +
+	      '<div class="leyenda-filas">' +
+	      '<img src="img/violetaClaro.png" alt="10" class="fotovioletaClaro-leyenda">' +
+	      '<span class="leyenda-columna-texto">Nivel 4.3</span>' +
+	      '</div>' +
+	      '<div class="leyenda-filas">' +
+	      '<img src="img/negro.png" alt="10" class="fotonegro-leyenda">' +
 	      '<span class="leyenda-columna-texto">Nivel 5</span>' +
 	    '</div>';
 	  return div;
@@ -305,15 +341,35 @@ legend4.onAdd = function (map) {
 	      '</div>' +
 	      '<div class="leyenda-filas">' +
 	      '<span>30%  </span>' +
-	      '<span class="leyenda-columna-texto">Nivel 2</span>' +
+	      '<span class="leyenda-columna-texto">Nivel 2.1</span>' +
+	      '</div>' +
+	      '<div class="leyenda-filas">' +
+	      '<span>35%  </span>' +
+	      '<span class="leyenda-columna-texto">Nivel 2.2</span>' +
 	      '</div>' +
 	      '<div class="leyenda-filas">' +
 	      '<span>50%  </span>' +
-	      '<span class="leyenda-columna-texto">Nivel 3</span>' +
+	      '<span class="leyenda-columna-texto">Nivel 3.1</span>' +
+	      '</div>' +
+	      '<div class="leyenda-filas">' +
+	      '<span>55%  </span>' +
+	      '<span class="leyenda-columna-texto">Nivel 3.2</span>' +
+	      '</div>' +
+	      '<div class="leyenda-filas">' +
+	      '<span>60%  </span>' +
+	      '<span class="leyenda-columna-texto">Nivel 3.3</span>' +
 	      '</div>' +
 	      '<div class="leyenda-filas">' +
 	      '<span>70%  </span>' +
-	      '<span class="leyenda-columna-texto">Nivel 4</span>' +
+	      '<span class="leyenda-columna-texto">Nivel 4.1</span>' +
+	      '</div>' +
+	      '<div class="leyenda-filas">' +
+	      '<span>75%  </span>' +
+	      '<span class="leyenda-columna-texto">Nivel 4.2</span>' +
+	      '</div>' +
+	      '<div class="leyenda-filas">' +
+	      '<span>80%  </span>' +
+	      '<span class="leyenda-columna-texto">Nivel 4.3</span>' +
 	      '</div>' +
 	      '<div class="leyenda-filas">' +
 	      '<span>90%  </span>' +
@@ -321,9 +377,6 @@ legend4.onAdd = function (map) {
 	    '</div>';
 	  return div;
 };
-
-
-
 
 ////////////////////////////////////////////CREAMOS LEYENDA PARA TÉCNICA 1: MÚLTIPLES LOCALIZACIONES/////////////////////////////////////////////////////////////////////////////
 

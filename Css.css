@@ -133,6 +133,46 @@
 }
 
 /* Clase para las leyendas */
+.fotoazul-leyenda {
+  width: 25px; /* Ajusta el ancho deseado */
+  height: 35px; /* Ajusta la altura deseada */
+}
+.fotorojoOscuro-leyenda {
+  width: 20px; /* Ajusta el ancho deseado */
+  height: 35px; /* Ajusta la altura deseada */
+}
+.fotorojo-leyenda {
+ width: 35px; /* Ajusta el ancho deseado */
+  height: 35px; /* Ajusta la altura deseada */
+}
+.fotoverdeOscuro-leyenda {
+  width: 20px; /* Ajusta el ancho deseado */
+  height: 35px; /* Ajusta la altura deseada */
+}
+.fotoverde-leyenda {
+  width: 25px; /* Ajusta el ancho deseado */
+  height: 35px; /* Ajusta la altura deseada */
+}
+.fotoverdeClaro-leyenda {
+  width: 25px; /* Ajusta el ancho deseado */
+  height: 35px; /* Ajusta la altura deseada */
+}
+.fotovioletaOscuro-leyenda {
+  width: 25px; /* Ajusta el ancho deseado */
+  height: 35px; /* Ajusta la altura deseada */
+}
+.fotovioleta-leyenda {
+ width: 25px; /* Ajusta el ancho deseado */
+  height: 35px; /* Ajusta la altura deseada */
+}
+.fotovioletaClaro-leyenda {
+  width: 25px; /* Ajusta el ancho deseado */
+  height: 35px; /* Ajusta la altura deseada */
+}
+.fotonegro-leyenda {
+  width: 35px; /* Ajusta el ancho deseado */
+  height: 35px; /* Ajusta la altura deseada */
+}
 .leyenda {
 	position: absolute;
 	display: none;
@@ -140,7 +180,7 @@
 	border: 1px solid #ccc;
 	padding: 10px;
 	width: 100px;
-	height: 350px;
+	height: 520px;
 	flex-direction: column;
 	right: 10px;
 }
@@ -151,7 +191,7 @@
 	border: 1px solid #ccc;
 	padding: 10px;
 	width: 100px;
-	height: 250px;
+	height: 370px;
 	flex-direction: column;
 	right: 10px;
 }

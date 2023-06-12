@@ -16,7 +16,7 @@ function loadJSONAndAddMarkers2(map, total){
 	if(polylineLayer && Object.keys(polyLineLayerList).length !== 0){
 	polylineLayer.setStyle({ color: 'transparent' });
 	}
-	fetch('JSON/salida10000.json')
+	fetch('JSON/salidaYO.json')
 		.then(response => response.json())
 		.then(data => {
 			// Set para que las URI sean únicas y no estén repetidas
@@ -41,37 +41,101 @@ function loadJSONAndAddMarkers2(map, total){
 				const label = punto.objectlabel.value;
 				let valorPlace = punto.place.value;
 				let clase = mapaClases.get(valorPlace.split('/')[3]);
-				
+				let code = mapaCodes.get(valorPlace.split('/')[3]);
 				//SOLUCIÓN 2 A DIFERENTE NIVEL DE GRANULARIDAD
 				// Determina el color del marcador según si la etiqueta contiene una coma o no
 				switch (clase) {
 						 // usar una sentencia switch para evaluar el valor de valorPlace
 						case  'P': 
-								contador ++;
-								const markerIconP = L.divIcon({
-								  className: 'custom-icon2',
+								contador ++; switch (code) {
+								    case 'PPLA':
+								      // Verde más oscuro
+								       const markerVerdeOscuro = L.divIcon({
+								className: 'custom-icon2',
 								  html: `<div class="marker-label">50%</div>`,
 								  iconSize: [25, 41],
 								  iconAnchor: [12, 41],
 								  popupAnchor: [1, -34],
 								  shadowSize: [41, 41],
 								});
+								const popupContentVerdeOscuro = `<b>${label}</b><br>${punto.placename.value}`;
 								
-								const popupContentP = `<b>${label}</b><br>${punto.placename.value}`;
-								
-								
-								const markerP = L.marker([lat, lng], {
-								  icon: markerIconP,
-								  uri: valorUri,
+								const markerVOscuro = L.marker([lat, lng], {
+									icon: markerVerdeOscuro,
+									uri: valorUri,
 								})
-								  .bindPopup(popupContentP)
-								  .addTo(Preciso);
-								
+									.bindPopup(popupContentVerdeOscuro)
+									.addTo(Preciso);
 								loadedURIs.add(valorUri);
+								      break;
+								    case 'PPLA3':
+								      // Verde 
+								     const markerVerde = L.divIcon({
+								className: 'custom-icon2',
+								  html: `<div class="marker-label">55%</div>`,
+								  iconSize: [25, 41],
+								  iconAnchor: [12, 41],
+								  popupAnchor: [1, -34],
+								  shadowSize: [41, 41],
+								});
+								const popupContentVerde = `<b>${label}</b><br>${punto.placename.value}`;
+								
+								const markerV = L.marker([lat, lng], {
+									icon: markerVerde,
+									uri: valorUri,
+								})
+									.bindPopup(popupContentVerde)
+									.addTo(Preciso);
+								loadedURIs.add(valorUri);
+								      break;
+								    case 'PPLA2':
+								      // Verde más claro
+								     const markerVerdeClaro = L.divIcon({
+								className: 'custom-icon2',
+								  html: `<div class="marker-label">60%</div>`,
+								  iconSize: [25, 41],
+								  iconAnchor: [12, 41],
+								  popupAnchor: [1, -34],
+								  shadowSize: [41, 41],
+								});
+								const popupContentVerdeClaro = `<b>${label}</b><br>${punto.placename.value}`;
+								
+								const markerVClaro = L.marker([lat, lng], {
+									icon: markerVerdeClaro,
+									uri: valorUri,
+								})
+									.bindPopup(popupContentVerdeClaro)
+									.addTo(Preciso);
+								loadedURIs.add(valorUri);
+								     break;
+								    default:
+								      // Rojo predeterminado
+								      const markerVerdeDefault = L.divIcon({
+								className: 'custom-icon2',
+								  html: `<div class="marker-label">55%</div>`,
+								  iconSize: [25, 41],
+								  iconAnchor: [12, 41],
+								  popupAnchor: [1, -34],
+								  shadowSize: [41, 41],
+								});
+								const popupContentVerdeDefault = `<b>${label}</b><br>${punto.placename.value}`;
+								
+								const markerVDefault = L.marker([lat, lng], {
+									icon: markerVerdeDefault,
+									uri: valorUri,
+								})
+									.bindPopup(popupContentVerdeDefault)
+									.addTo(Preciso);
+								loadedURIs.add(valorUri);
+								      break;
+								  }
+								
 								break;
 						case 'A':
-								contador ++;
-								const markerIconA = L.divIcon({
+								contador ++;switch (code) {
+								    case 'ADM3':
+								      // Rojo más oscuro
+								       const markerRojoOscuro =  L.divIcon({
 								className: 'custom-icon2',
 								  html: `<div class="marker-label">30%</div>`,
 								  iconSize: [25, 41],
@@ -79,15 +143,58 @@ function loadJSONAndAddMarkers2(map, total){
 								  popupAnchor: [1, -34],
 								  shadowSize: [41, 41],
 								});
-								const popupContentA = `<b>${label}</b><br>${punto.placename.value}`;
+								const popupContentRojoOscuro = `<b>${label}</b><br>${punto.placename.value}`;
 								
-								const markerA = L.marker([lat, lng], {
-									icon: markerIconA,
+								const markerROscuro = L.marker([lat, lng], {
+									icon: markerRojoOscuro,
 									uri: valorUri,
 								})
-									.bindPopup(popupContentA)
-									.addTo(markers);
+									.bindPopup(popupContentRojoOscuro)
+									.addTo(Abstracto);
 								loadedURIs.add(valorUri);
+								      break;
+								    case 'PCLI':
+								      // Rojo 
+								      const markerRojoClaro =  L.divIcon({
+								className: 'custom-icon2',
+								  html: `<div class="marker-label">35%</div>`,
+								  iconSize: [25, 41],
+								  iconAnchor: [12, 41],
+								  popupAnchor: [1, -34],
+								  shadowSize: [41, 41],
+								});
+								const popupContentRojoClaro = `<b>${label}</b><br>${punto.placename.value}`;
+								
+								const markerRCLaro = L.marker([lat, lng], {
+									icon: markerRojoClaro,
+									uri: valorUri,
+								})
+									.bindPopup(popupContentRojoClaro)
+									.addTo(Abstracto);
+								loadedURIs.add(valorUri);
+								      break;
+								    default:
+								      // Rojo predeterminado
+								      const markerRojoDefault =  L.divIcon({
+								className: 'custom-icon2',
+								  html: `<div class="marker-label">35%</div>`,
+								  iconSize: [25, 41],
+								  iconAnchor: [12, 41],
+								  popupAnchor: [1, -34],
+								  shadowSize: [41, 41],
+								});
+								const popupContentRojoDefault = `<b>${label}</b><br>${punto.placename.value}`;
+								
+								const markerRDefault = L.marker([lat, lng], {
+									icon: markerRojoDefault,
+									uri: valorUri,
+								})
+									.bindPopup(popupContentRojoDefault )
+									.addTo(Abstracto);
+								loadedURIs.add(valorUri);
+								      break;
+								  }
+								
 							break;
 						case 'V': 
 								contador ++;
@@ -131,7 +238,10 @@ function loadJSONAndAddMarkers2(map, total){
 							break;
 						case 'L':
 								contador ++;
-								const markerIconL =  L.divIcon({
+								switch (code) {
+								    case 'PRK':
+								      // Violeta más oscuro
+								     const markerVioletaOscuro =  L.divIcon({
 								className: 'custom-icon2',
 								  html: `<div class="marker-label">90%</div>`,
 								  iconSize: [25, 41],
@@ -139,15 +249,58 @@ function loadJSONAndAddMarkers2(map, total){
 								  popupAnchor: [1, -34],
 								  shadowSize: [41, 41],
 								});
-								const popupContentL = `<b>${label}</b><br>${punto.placename.value}`;
+								const popupContentVioletaOscuro = `<b>${label}</b><br>${punto.placename.value}`;
 								
-								const markerL = L.marker([lat, lng], {
-									icon: markerIconL,
+								const markerViOscuro = L.marker([lat, lng], {
+									icon: markerVioletaOscuro,
 									uri: valorUri,
 								})
-									.bindPopup(popupContentL)
-									.addTo(markers);
+									.bindPopup(popupContentVioletaOscuro)
+									.addTo(Especifico);
 								loadedURIs.add(valorUri);
+								      break;
+								    case 'RGN':
+								      // Violeta más claro
+								       const markerVioletaClaro=  L.divIcon({
+								className: 'custom-icon2',
+								  html: `<div class="marker-label">95%</div>`,
+								  iconSize: [25, 41],
+								  iconAnchor: [12, 41],
+								  popupAnchor: [1, -34],
+								  shadowSize: [41, 41],
+								});
+								const popupContentVioletaClaro = `<b>${label}</b><br>${punto.placename.value}`;
+								
+								const markerViClaro = L.marker([lat, lng], {
+									icon: markerVioletaClaro,
+									uri: valorUri,
+								})
+									.bindPopup(popupContentVioletaClaro)
+									.addTo(Especifico);
+								loadedURIs.add(valorUri);
+								      break;
+								    default:
+								  // Violeta predeterminado
+								      const markerVioletaDefault =  L.divIcon({
+								className: 'custom-icon2',
+								  html: `<div class="marker-label">90%</div>`,
+								  iconSize: [25, 41],
+								  iconAnchor: [12, 41],
+								  popupAnchor: [1, -34],
+								  shadowSize: [41, 41],
+								});
+								const popupContentVioletaDefault = `<b>${label}</b><br>${punto.placename.value}`;
+								
+								const markerViDefault = L.marker([lat, lng], {
+									icon: markerVioletaDefault,
+									uri: valorUri,
+								})
+									.bindPopup(popupContentVioletaDefault)
+									.addTo(Especifico);
+								loadedURIs.add(valorUri);
+								      break;
+								  }
+								
 							 break;
 						case 'R':
 								contador ++;

@@ -182,6 +182,15 @@ function anadirMapaCalor(event){
 		var numInterpolatedPoints = 10;
 	}
 	
+	map.on('zoomend', function() {
+		var zoomLevel = map.getZoom();
+		console.log(zoomLevel);	        
+	});
+	if(numInterpolatedPoints=60){
+		zoomLevel=4;
+		map.setZoom(zoomLevel);
+	}
+	
 	// Calcular los puntos intermedios
 	 // Número de puntos intermedios deseados
 	for (var i = 0; i < numInterpolatedPoints; i++) {

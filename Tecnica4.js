@@ -176,13 +176,9 @@ function anadirMapaCalor(event){
 	
 	var interpolatedPoints = [];
 	if(coords[0][1]>40){
+		console.log(coords[0][1]);
 		var numInterpolatedPoints = 60;
-	}
-	else{
-		var numInterpolatedPoints = 10;
-	}
-	
-	map.on('zoomend', function() {
+		map.on('zoomend', function() {
 		var zoomLevel = map.getZoom();
 		console.log(zoomLevel);	        
 	});
@@ -190,6 +186,13 @@ function anadirMapaCalor(event){
 		zoomLevel=4;
 		map.setZoom(zoomLevel);
 	}
+	}
+	else{
+		console.log(coords[0][1]);
+		var numInterpolatedPoints = 10;
+	}
+	
+	
 	
 	// Calcular los puntos intermedios
 	 // Número de puntos intermedios deseados

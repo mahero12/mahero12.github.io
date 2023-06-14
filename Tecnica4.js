@@ -176,7 +176,6 @@ function anadirMapaCalor(event){
 	
 	var interpolatedPoints = [];
 	if(coords[0][1]>40){
-		console.log(coords[0][1]);
 		var numInterpolatedPoints = 60;
 		map.on('zoomend', function() {
 		var zoomLevel = map.getZoom();
@@ -188,7 +187,6 @@ function anadirMapaCalor(event){
 	}
 	}
 	else{
-		console.log(coords[0][1]);
 		var numInterpolatedPoints = 10;
 	}
 	

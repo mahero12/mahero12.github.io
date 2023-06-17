@@ -48,14 +48,13 @@ function loadJSONAndAddMarkers1(map, total){
 				// Determina el color del marcador según si la etiqueta contiene una coma o no
 				switch (clase) {
 						 // usar una sentencia switch para evaluar el valor de valorPlace
-						case  'P': popupClass = 'green-popup';
-							markerColor = 'green';
+						case  'P': popupClass = 'white-popup';
 								contador ++;
 								 switch (code) {
 								    case 'PPLA':
 								      // Verde más oscuro
 								       const markerVerdeOscuro = L.icon({
-									iconUrl: 'img/verdeOscuro.png',
+									iconUrl: 'img/amarillo.png',
 									shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-shadow.png',
 									iconSize: [25, 41],
 									iconAnchor: [12, 41],
@@ -99,7 +98,7 @@ function loadJSONAndAddMarkers1(map, total){
 								    case 'PPLA2':
 								      // Verde más claro
 								     const markerVerdeClaro = L.icon({
-									iconUrl: 'img/verdeClaro.png',
+									iconUrl: 'img/violetaClaro.png',
 									shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-shadow.png',
 									iconSize: [35, 41],
 									iconAnchor: [12, 41],
@@ -119,7 +118,7 @@ function loadJSONAndAddMarkers1(map, total){
 								loadedURIs.add(valorUri);
 								     break;
 								    default:
-								      // Rojo predeterminado
+								      // verde predeterminado
 								      const markerVerdeDefault = L.icon({
 									iconUrl: 'https://cdn.rawgit.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-green.png',
 									shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-shadow.png',
@@ -143,21 +142,20 @@ function loadJSONAndAddMarkers1(map, total){
 								  }
 								
 								break;
-						case 'A': popupClass = 'red-popup';
-							markerColor = 'red';
+						case 'A': popupClass = 'white-popup';
 								contador ++;
 								  switch (code) {
 								    case 'ADM3':
 								      // Rojo más oscuro
 								       const markerRojoOscuro = L.icon({
-									iconUrl: 'img/rojoOscuro.png',
+									iconUrl: 'img/rosa.png',
 									shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-shadow.png',
-									iconSize: [25, 41],
+									iconSize: [35, 41],
 									iconAnchor: [12, 41],
 									popupAnchor: [1, -34],
 									shadowSize: [41, 41],
 								});
-								const popupContentRojoOscuro  = `<b>${label}</b><br>${punto.placename.value}`;
+								const popupContentRojoOscuro  = `<b>${label}</b><br>${punto.placename.value}<br>nivel 2.1</b> `;
 								const popupOptionsRojoOscuro  = {
 									className: popupClass,
 								};
@@ -216,11 +214,10 @@ function loadJSONAndAddMarkers1(map, total){
 								  }
 								
 							break;
-						case 'V': popupClass = 'orange-popup';
-							markerColor = 'orange';
+						case 'V': popupClass = 'white-popup';
 								contador ++;
 								const markerIconV = L.icon({
-									iconUrl: `https://cdn.rawgit.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-${markerColor}.png`,
+									iconUrl: 'img/moca.png',
 									shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-shadow.png',
 									iconSize: [25, 41],
 									iconAnchor: [12, 41],
@@ -239,11 +236,10 @@ function loadJSONAndAddMarkers1(map, total){
 									.addTo(Concreto);
 								loadedURIs.add(valorUri);
 							break;
-						case 'T': popupClass = 'yellow-popup';
-							markerColor = 'yellow';
+						case 'T': popupClass = 'white-popup';
 								contador ++;
 								const markerIconT = L.icon({
-									iconUrl: `https://cdn.rawgit.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-${markerColor}.png`,
+									iconUrl: 'img/moca.png',
 									shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-shadow.png',
 									iconSize: [25, 41],
 									iconAnchor: [12, 41],
@@ -269,7 +265,7 @@ function loadJSONAndAddMarkers1(map, total){
 								    case 'PRK':
 								      // Rojo más oscuro
 								      const markerVioletaOscuro = L.icon({
-									iconUrl: 'img/violetaOscuro.png',
+									iconUrl: 'img/violeta.png',
 									shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-shadow.png',
 									iconSize: [35, 41],
 									iconAnchor: [12, 41],
@@ -291,7 +287,7 @@ function loadJSONAndAddMarkers1(map, total){
 								    case 'RGN':
 								      // Rojo más claro
 								       const markerVioletaClaro = L.icon({
-									iconUrl: 'img/violetaClaro.png',
+									iconUrl: 'img/naranja.png',
 									shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-shadow.png',
 									iconSize: [35, 41],
 									iconAnchor: [12, 41],
@@ -313,7 +309,7 @@ function loadJSONAndAddMarkers1(map, total){
 								    default:
 								  // Violeta predeterminado
 								      const markerVioletaDefault = L.icon({
-									iconUrl: 'https://cdn.rawgit.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-violet.png',
+									iconUrl: 'https://cdn.rawgit.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-naranja.png',
 									shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-shadow.png',
 									iconSize: [25, 41],
 									iconAnchor: [12, 41],

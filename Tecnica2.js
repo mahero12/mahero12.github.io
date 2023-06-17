@@ -52,7 +52,7 @@ function loadJSONAndAddMarkers2(map, total){
 								      // Verde más oscuro
 								       const markerVerdeOscuro = L.divIcon({
 								className: 'custom-icon2',
-								  html: `<div class="marker-label">50%</div>`,
+								  html: `<div class="marker-label">40%</div>`,
 								  iconSize: [25, 41],
 								  iconAnchor: [12, 41],
 								  popupAnchor: [1, -34],
@@ -72,7 +72,7 @@ function loadJSONAndAddMarkers2(map, total){
 								      // Verde 
 								     const markerVerde = L.divIcon({
 								className: 'custom-icon2',
-								  html: `<div class="marker-label">55%</div>`,
+								  html: `<div class="marker-label">50%</div>`,
 								  iconSize: [25, 41],
 								  iconAnchor: [12, 41],
 								  popupAnchor: [1, -34],
@@ -112,7 +112,7 @@ function loadJSONAndAddMarkers2(map, total){
 								      // Rojo predeterminado
 								      const markerVerdeDefault = L.divIcon({
 								className: 'custom-icon2',
-								  html: `<div class="marker-label">55%</div>`,
+								  html: `<div class="marker-label">50%</div>`,
 								  iconSize: [25, 41],
 								  iconAnchor: [12, 41],
 								  popupAnchor: [1, -34],
@@ -137,7 +137,7 @@ function loadJSONAndAddMarkers2(map, total){
 								      // Rojo más oscuro
 								       const markerRojoOscuro =  L.divIcon({
 								className: 'custom-icon2',
-								  html: `<div class="marker-label">30%</div>`,
+								  html: `<div class="marker-label">20%</div>`,
 								  iconSize: [25, 41],
 								  iconAnchor: [12, 41],
 								  popupAnchor: [1, -34],
@@ -157,7 +157,7 @@ function loadJSONAndAddMarkers2(map, total){
 								      // Rojo 
 								      const markerRojoClaro =  L.divIcon({
 								className: 'custom-icon2',
-								  html: `<div class="marker-label">35%</div>`,
+								  html: `<div class="marker-label">30%</div>`,
 								  iconSize: [25, 41],
 								  iconAnchor: [12, 41],
 								  popupAnchor: [1, -34],
@@ -177,7 +177,7 @@ function loadJSONAndAddMarkers2(map, total){
 								      // Rojo predeterminado
 								      const markerRojoDefault =  L.divIcon({
 								className: 'custom-icon2',
-								  html: `<div class="marker-label">35%</div>`,
+								  html: `<div class="marker-label">30%</div>`,
 								  iconSize: [25, 41],
 								  iconAnchor: [12, 41],
 								  popupAnchor: [1, -34],
@@ -243,7 +243,7 @@ function loadJSONAndAddMarkers2(map, total){
 								      // Violeta más oscuro
 								     const markerVioletaOscuro =  L.divIcon({
 								className: 'custom-icon2',
-								  html: `<div class="marker-label">90%</div>`,
+								  html: `<div class="marker-label">80%</div>`,
 								  iconSize: [25, 41],
 								  iconAnchor: [12, 41],
 								  popupAnchor: [1, -34],
@@ -263,7 +263,7 @@ function loadJSONAndAddMarkers2(map, total){
 								      // Violeta más claro
 								       const markerVioletaClaro=  L.divIcon({
 								className: 'custom-icon2',
-								  html: `<div class="marker-label">95%</div>`,
+								  html: `<div class="marker-label">90%</div>`,
 								  iconSize: [25, 41],
 								  iconAnchor: [12, 41],
 								  popupAnchor: [1, -34],
@@ -306,7 +306,7 @@ function loadJSONAndAddMarkers2(map, total){
 								contador ++;
 								const markerIconR =  L.divIcon({
 								className: 'custom-icon2',
-								  html: `<div class="marker-label">90%</div>`,
+								  html: `<div class="marker-label">100%</div>`,
 								  iconSize: [25, 41],
 								  iconAnchor: [12, 41],
 								  popupAnchor: [1, -34],
@@ -326,7 +326,7 @@ function loadJSONAndAddMarkers2(map, total){
 								contador ++;
 								const markerIconS =  L.divIcon({
 								className: 'custom-icon2',
-								  html: `<div class="marker-label">90%</div>`,
+								  html: `<div class="marker-label">100%</div>`,
 								  iconSize: [25, 41],
 								  iconAnchor: [12, 41],
 								  popupAnchor: [1, -34],

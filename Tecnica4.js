@@ -156,51 +156,40 @@ function anadirMapaCalor(event){
 	const marcadoresURI = findMarcadoresByUriFalse(uri);
 	const marcadoresURI2 = findMarcadoresByUri(uri);
 	// Se crea un array con las coordenadas de los marcadores encontrados
-	
 	const coords = marcadoresURI.map(marcador => [marcador.getLatLng().lat, marcador.getLatLng().lng]);
 	const coords2=marcadoresURI2.map(marcador => [marcador.getLatLng().lat, marcador.getLatLng().lng]);
-	
 	var data = {
 	  data: []
 	};
-	
 	// Agregar las coordenadas de los marcadores al objeto data
 	for (var i = 0; i < coords.length; i++) {
 	  data.data.push({ lat: coords[i][0], lng: coords[i][1], count: 4 });
 	}
-	
 	// Agregar las coordenadas de los marcadores2 al objeto data
 	for (var i = 0; i < coords2.length; i++) {
 	  data.data.push({ lat: coords2[i][0], lng: coords2[i][1], count: 3 });
 	}
-	
 	var interpolatedPoints = [];
 	if(coords[0][1]>40){
 		var numInterpolatedPoints = 60;
-		map.on('zoomend', function() {
-		var zoomLevel = map.getZoom();
-		console.log(zoomLevel);	        
-	});
-	if(numInterpolatedPoints=60){
-		zoomLevel=4;
-		map.setZoom(zoomLevel);
-	}
+			map.on('zoomend', function() {
+			var zoomLevel = map.getZoom();
+			console.log(zoomLevel);	        
+		});
+		if(numInterpolatedPoints=60){
+			zoomLevel=4;
+			map.setZoom(zoomLevel);
+		}
 	}
 	else{
 		var numInterpolatedPoints = 10;
 	}
-	
-	
-	
-	// Calcular los puntos intermedios
-	 // Número de puntos intermedios deseados
 	for (var i = 0; i < numInterpolatedPoints; i++) {
 	  var t = i / (numInterpolatedPoints - 1);
 	  var lat = coords[0][0] * (1 - t) + coords2[0][0] * t;
 	  var lng = coords[0][1] * (1 - t) + coords2[0][1] * t;
 	  interpolatedPoints.push([lat, lng]);
 	}
-	// Agregar los puntos intermedios al objeto data con count: 1
 	interpolatedPoints.forEach(coordinates => {
 	  data.data.push({ lat: coordinates[0], lng: coordinates[1], count: 1 });
 	});
@@ -234,8 +223,6 @@ function anadirMapaCalor(event){
 		    valueField: 'count'
 		  }).addTo(map);
 	  }
- 
-      // Agregar los datos al overlay de heatmap
       heatmapLayer.setData(data);
       heatmapLayerList.push(heatmapLayer);
 		// Se añade un botón para eliminar el mapa de calor

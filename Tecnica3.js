@@ -157,7 +157,6 @@ function loadJSONAndAddMarkers3(map, total) {
 
 
 function anadirMarcadoresSecundarios(uri){
-	
 	const markerHtmlStyles = `
               background-color: #FF0000;
               width: 2rem;
@@ -186,8 +185,6 @@ function anadirMarcadoresSecundarios(uri){
 						popupAnchor: [0, -36],
 						html: `<span style="${markerHtmlStyles}"><p style="${labelMarkerStyle}">7</p></span>`,
 					});
-
-
 	if (marcadores2.length !== 0) {
 	  for (let i = 0; i < marcadores2.length; i++) {
 	    const marcador = marcadores2[i];
@@ -201,7 +198,6 @@ function anadirMarcadoresSecundarios(uri){
 					  map.removeLayer(marcadorPrincipal);
 	}
 }
-
 	let marcadoresURI2 = findMarcadoresByUriFalse(uri);
 	let marcadoresURI = findMarcadoresByUri(uri);
 	
